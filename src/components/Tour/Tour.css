@@ -1,3 +1,10 @@
 .tour__Card {
-    border: solid 2px black;
+  border: dotted 2px black;
+  margin: 10px;
+}
+
+.tour__Container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
