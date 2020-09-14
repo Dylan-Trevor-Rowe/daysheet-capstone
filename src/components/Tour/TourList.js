@@ -6,7 +6,7 @@ import './Tour.css'
 
 
 
-export const TourList = () => {
+export const TourList = (props) => {
 
     const { tours, getTour } = useContext(TourContext)
 
@@ -16,12 +16,14 @@ export const TourList = () => {
 
 
  
-    return ( 
+    return <>
+ 
         <section className="tour__Container">
             {
                 tours.map(tour => {
                     return <article key={tour.id} className="tour__Card">
                         <div><h3>date: {tour.date}</h3></div>
+                        <div><h3>date: {tour.tourName}</h3></div>
                         <div>venue: {tour.venueName}</div>
                         <div>venue address: {tour.venueLocation}</div> 
                         <div> Promoter email: {tour.promoterContact}</div>
@@ -30,7 +32,7 @@ export const TourList = () => {
                         <div>Catinering: {tour.catering}</div>
                         <div>Buyout: {tour.buyOut}</div>
                         <div>Set time: {tour.setTime}</div>
-                        <div>Hotel: {tour.hotelName}</div>
+                        <div>Hotel: {tour.Hotel}</div>
                         <div> Hotel Location: {tour.hotelLocation}</div>
                         <button>delete</button>
                         <button>edit</button>
@@ -41,5 +43,5 @@ export const TourList = () => {
 
           
         </section>
-    )
+    </>
 }
