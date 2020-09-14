@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DaySheet } from './components/DaySheet';
-import './index.css';
 
+import { DaySheet } from './components/DaySheet'
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <DaySheet/>
-  </React.StrictMode>,
+
+    <React.StrictMode>
+      <DaySheet />
+    </React.StrictMode>
+ ,
   document.getElementById('root')
+
 );
