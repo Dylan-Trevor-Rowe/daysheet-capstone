@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Login.css"
 
 
@@ -8,6 +8,7 @@ export const Login = props => {
     const password = useRef()
     const existDialog = useRef()
     const passwordDialog = useRef()
+    const history = useHistory()
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -22,7 +23,7 @@ export const Login = props => {
             .then(exists => {
                 if (exists && exists.password === password.current.value) {
                     localStorage.setItem("tour_manager", exists.id)
-                    props.history.push("/")
+                    history.push("/")
                 } else if (exists && exists.password !== password.current.value) {
                     passwordDialog.current.showModal()
                 } else if (!exists) {
@@ -43,7 +44,7 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Nashville Kennels</h1>
+                    <h1></h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
@@ -71,7 +72,7 @@ export const Login = props => {
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+                {/* <Link to="/register">Not a member yet?</Link> */}
             </section>
         </main>
     )
