@@ -5,14 +5,21 @@ export const TourContext = React.createContext()
 
 export const TourProvider = (props) => {
 const [tours, setTour] = useState([])
+const [tourName, setTourName] = useState([])
+
 
 const getTour = () => {
     return fetch('http://localhost:8088/tourDay')
     .then(res => res.json())
     .then(setTour)
 }
+const getTourName = () => {
+    return fetch('http://localhost:8088/tour')
+    .then(res => res.json())
+    .then(setTourName)
+}
 
-const addTour = tour => {
+const addTourDay = tour => {
     return fetch("http://localhost:8088/tourDay", {
         method: "POST",
         headers: {
@@ -25,7 +32,7 @@ const addTour = tour => {
 
 return (
     <TourContext.Provider value={{
-        tours, getTour, addTour
+        tours, getTour, addTourDay, getTourName, tourName
     }}>
         {props.children}
     </TourContext.Provider>

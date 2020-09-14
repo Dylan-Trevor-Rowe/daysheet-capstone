@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { TourList } from "./Tour/TourList"
+import { NewDayForm } from "./Tour/TourForm"
+import './Tour/Tour.css'
 import './DaySheet.css'
 import { TourProvider } from "./Tour/TourProvider"
 import { Login } from './Auth/Login'
@@ -36,6 +38,7 @@ export const DaySheet = () => {
                 </Route>
                 <Route path='/tours' exact>
                     <TourProvider>
+                        <NewDayForm />
                         <TourList />
                     </TourProvider>
                 </Route>
