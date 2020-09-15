@@ -7,6 +7,8 @@ import { TourProvider } from "./Tour/TourProvider"
 import { Login } from './Auth/Login'
 import { Register } from './Auth/Register'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
+import { UserProvider } from "./Users/UserProvider"
+// import { TourSelect } from './Tour/TourSelect'
 
 
 export const DaySheet = () => {
@@ -31,15 +33,25 @@ export const DaySheet = () => {
                 <Route path='/' exact>
                     {
                         loggedIn ? <TourProvider>
+                            <UserProvider>
                             <TourList />
+                            </UserProvider>
                         </TourProvider> : <Redirect to="/login"></Redirect>
-                     }
-                 
+                    }
+
+                </Route>
+                <Route path='/tourForm' exact>
+                    <TourProvider>
+
+                        <NewDayForm />
+
+                    </TourProvider>
                 </Route>
                 <Route path='/tours' exact>
                     <TourProvider>
-                        <NewDayForm />
+
                         <TourList />
+
                     </TourProvider>
                 </Route>
 

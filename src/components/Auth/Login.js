@@ -50,7 +50,7 @@ export const Login = props => {
                         <label htmlFor="inputEmail"> Email address </label>
                         <input ref={email} type="email"
                             id="email"
-                            defaultValue="steve@stevebrownlee.com"
+                            defaultValue="dylanthk@gmail.com"
                             className="form-control"
                             placeholder="Email address"
                             required autoFocus />
@@ -72,7 +72,7 @@ export const Login = props => {
                 </form>
             </section>
             <section className="link--register">
-                {/* <Link to="/register">Not a member yet?</Link> */}
+                <Link to="/register">Not a member yet?</Link>
             </section>
         </main>
     )
