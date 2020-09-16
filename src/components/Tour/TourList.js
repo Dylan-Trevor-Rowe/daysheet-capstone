@@ -1,5 +1,6 @@
 
 import { TourContext } from './TourProvider'
+// import { UserContext } from '../Users/UserProvider'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Tour.css'
 import { useHistory } from "react-router-dom";
@@ -10,7 +11,6 @@ import { useHistory } from "react-router-dom";
 export const TourList = () => {
 
     const { tours, getTour, releaseTourDay, tourName, getTourName } = useContext(TourContext)
-    
 
     const [filteredTours, setTours] = useState([])
 
@@ -21,21 +21,15 @@ export const TourList = () => {
     }, [])
 
     useEffect(() => {
-        const userTours = tourName.filter(tour => tour.userId === parseInt(localStorage.getItem("tour_manager")))
 
-        setTours(userTours)
+        const parsedTours = tourName.filter(tour => tour.userId === parseInt(sessionStorage.getItem("tour_manager"))) || {}
+        const evenMoreTours = parsedTours.filter(tour => tours.tourId === tour.id) || {}
 
-    }, [tourName])
+        setTours(evenMoreTours)
+        console.log(evenMoreTours)
+    }, [])
 
-    
 
-    // useEffect(() => {
-    //     const userTours = filteredTours.filter(tour => tour. === parseInt(localStorage.getItem("tour_manager")))
-      
-    //     setTours(userTours)
-
-    // }, [tourName])
-    
 
     const tourPick = useRef(null)
 
@@ -47,10 +41,40 @@ export const TourList = () => {
 
 
     return <>
+        {/* <div>
+        <img src="/home/useradd/workspace/daysheet/src/components/Auth/daySheet.png"/>
+    </div> */}
+        <article className="buttons__Container">
+            <button className="logOut" onClick={e => {
 
-        <select defaultValue="" name="tour" ref={tourPick} id="" className="form-control" >
+
+                history.push('/logout')
+
+            }}> logout</button>
+
+            <button className="createANewTour" onClick={e => {
+
+
+                history.push('/createnewtour')
+
+            }}> create a new tour</button>
+
+
+            <button className="createANewDay" onClick={e => {
+
+
+                history.push('/tourForm')
+
+            }}> create a new day</button>
+                    <button className="createANewMember" onClick={e => {
+
+               
+history.push('/crewform')
+
+}}>create crew member</button>
+     <select defaultValue="" name="tour" ref={tourPick} id="" className="select__Tour" >
             <option value="0">Select a tour</option>
-            {filteredTours.map(e =>
+            {tourName.map(e =>
                 (
                     <option key={e.id} value={e.id}>
                         {e.tourName}
@@ -59,18 +83,15 @@ export const TourList = () => {
 
             }
         </select>
+        </article>
 
-        <button onClick={e => {
+   
 
 
-            history.push('/tourForm')
-
-        }}> create a new day</button>
         <section className="tour__Container">
             {
                 tours.map(tour => {
-                    const pickedTours = tourName.filter(tourName => tourName.id === tour.tourId) || {}
-                
+                    const pickedTours = tourName.find(tourName => tourName.id === tour.tourId) || {}
 
                     return <article key={tour.id} className="tour__Card">
                         <div><h3>date: {tour.date}</h3></div>
@@ -95,7 +116,13 @@ export const TourList = () => {
                     </article>
 
                 })
+
+
             }
+         
         </section>
+      
+
+
     </>
 }

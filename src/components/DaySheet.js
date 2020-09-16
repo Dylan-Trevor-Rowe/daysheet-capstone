@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { TourList } from "./Tour/TourList"
 import { NewDayForm } from "./Tour/TourForm"
+import { CreateNewTour } from './Tour/CreateNewTour'
 import './Tour/Tour.css'
 import './DaySheet.css'
 import { TourProvider } from "./Tour/TourProvider"
@@ -8,10 +9,13 @@ import { Login } from './Auth/Login'
 import { Register } from './Auth/Register'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
 import { UserProvider } from "./Users/UserProvider"
+import { AddCrewForm } from "./Crew/CrewForm"
+import { CrewProvider } from "./Crew/CrewProvider"
+import { CrewList } from "./Crew/CrewList"
 // import { TourSelect } from './Tour/TourSelect'
 
 
-export const DaySheet = () => {
+export const DaySheet = (props) => {
     const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {
@@ -22,8 +26,15 @@ export const DaySheet = () => {
     }, [])
 
     return <>
-        <Router> <article>
+        <Router> 
+            <article>
             <Switch>
+            <Route path='/crewform'>
+                <CrewProvider>
+                    <AddCrewForm />
+                    </CrewProvider>
+                </Route>
+
                 <Route path='/register'>
                     <Register />
                 </Route>
@@ -33,9 +44,11 @@ export const DaySheet = () => {
                 <Route path='/' exact>
                     {
                         loggedIn ? <TourProvider>
-                            <UserProvider>
+                            <CrewProvider>
+                        
                             <TourList />
-                            </UserProvider>
+                            <CrewList/>
+                            </CrewProvider>
                         </TourProvider> : <Redirect to="/login"></Redirect>
                     }
 
@@ -54,7 +67,26 @@ export const DaySheet = () => {
 
                     </TourProvider>
                 </Route>
+                <Route path='/createnewtour' exact>
+                    <TourProvider>
 
+                    <CreateNewTour>
+
+                    </CreateNewTour>
+
+                    </TourProvider>
+                    </Route>
+                    {/* <Route path='/crewform' exact>
+                  
+                    </Route> */}
+                    <Route path="/logout" render={
+                (props) => {
+                    localStorage.removeItem("tour_manager")
+                    props.history.push("/login")
+                }
+            } >
+                </Route>
+                    
             </Switch>
 
         </article>
