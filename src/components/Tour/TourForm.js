@@ -23,7 +23,7 @@ export const NewDayForm = () => {
     const tourPick = useRef(null)
     const hotelName = useRef(null)
 
-    const { tourName, getTourName, addTourDay, getTour } = useContext(TourContext)
+    const { tourName, getTourName, addTourDay, } = useContext(TourContext)
     const [filteredTours, setTours] = useState([])
 
     useEffect(() => {
@@ -64,12 +64,15 @@ export const NewDayForm = () => {
             Hotel: hotelName.current.value,
             hotelLocation: hotelLocation.current.value,
             
+          
+            
             
             
             
             
 
             }
+           
         addTourDay(newDay).then(() =>{
             history.push('/')
         })
@@ -79,7 +82,7 @@ export const NewDayForm = () => {
         // }
     }
 
-
+  
 
 
     return <>
