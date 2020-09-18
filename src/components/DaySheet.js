@@ -12,7 +12,7 @@ import { UserProvider } from "./Users/UserProvider"
 import { AddCrewForm } from "./Crew/CrewForm"
 import { CrewProvider } from "./Crew/CrewProvider"
 import { CrewList } from "./Crew/CrewList"
-// import { TourSelect } from './Tour/TourSelect'
+
 
 
 export const DaySheet = (props) => {
@@ -26,70 +26,72 @@ export const DaySheet = (props) => {
     }, [])
 
     return <>
-        <Router> 
+        <Router>
             <article>
-            <Switch>
-            <Route path='/crewform'>
-                <CrewProvider>
-                    <AddCrewForm />
-                    </CrewProvider>
-                </Route>
+                <Switch>
+                    <Route path='/crewform'>
+                        <CrewProvider>
+                            <AddCrewForm />
+                        </CrewProvider>
+                    </Route>
 
-                <Route path='/register'>
-                    <Register />
-                </Route>
-                <Route path='/login'>
-                    <Login />
-                </Route>
-                <Route path='/' exact>
-                    {
-                        loggedIn ? <TourProvider>
-                            <CrewProvider>
-                        
-                            <TourList />
-                            <CrewList/>
-                            </CrewProvider>
-                        </TourProvider> : <Redirect to="/login"></Redirect>
-                    }
+                    <Route path='/register'>
+                        <Register />
+                    </Route>
+                    <Route path='/login'>
+                        <Login />
+                    </Route>
+                    <Route path='/' exact>
+                        {
+                            loggedIn ? <TourProvider>
+                                <UserProvider>
+                                    <CrewProvider>
 
-                </Route>
-                <Route path='/tourForm' exact>
-                    <TourProvider>
+                                        <TourList />
+                                        <CrewList />
+                                    </CrewProvider>
+                                </UserProvider>
+                            </TourProvider> : <Redirect to="/login"></Redirect>
+                        }
 
-                        <NewDayForm />
+                    </Route>
+                    <Route path='/tourForm' exact>
+                        <TourProvider>
 
-                    </TourProvider>
-                </Route>
-                <Route path='/tours' exact>
-                    <TourProvider>
+                            <NewDayForm />
 
-                        <TourList />
+                        </TourProvider>
+                    </Route>
+                    <Route path='/tours' exact>
+                        <TourProvider>
+                            <UserProvider>
+                                <TourList />
+                            </UserProvider>
+                        </TourProvider>
+                    </Route>
+                    <Route path='/createnewtour' exact>
+                        <TourProvider>
 
-                    </TourProvider>
-                </Route>
-                <Route path='/createnewtour' exact>
-                    <TourProvider>
+                            <CreateNewTour>
 
-                    <CreateNewTour>
+                            </CreateNewTour>
 
-                    </CreateNewTour>
-
-                    </TourProvider>
+                        </TourProvider>
                     </Route>
                     {/* <Route path='/crewform' exact>
                   
                     </Route> */}
                     <Route path="/logout" render={
-                (props) => {
-                    localStorage.removeItem("tour_manager")
-                    props.history.push("/login")
-                }
-            } >
-                </Route>
-                    
-            </Switch>
+                        (props) => {
+                            localStorage.removeItem("tour_manager")
+                            props.history.push("/login")
+                        }
+                    } >
+                    </Route>
 
-        </article>
+                </Switch>
+
+            </article>
         </Router>
     </>
 }

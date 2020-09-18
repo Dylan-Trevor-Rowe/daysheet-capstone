@@ -1,6 +1,6 @@
 import { CrewContext } from '../Crew/CrewProvider'
 
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../Tour/Tour.css'
 import { useHistory } from "react-router-dom";
 
@@ -17,17 +17,13 @@ export const CrewList = () => {
     }, [])
     return <>
         <section className="crew__Container">
-
-
-
-
-
-            {
+{
                 crew.map(crews => {
                    return <article key={crews.id} className="tour__Card">
-                        <div><h3>date: {crews.fullName}</h3></div>
-                        <div><h3> {crews.perdiem}</h3></div>
-                        <div>venue: {crews.payAmount}</div>
+                        <div><h3> crew members</h3></div>
+                        <div><h3>name: {crews.fullName}</h3></div>
+                        <div> perdiem: {crews.perdiem}</div>
+                        <div>payAmount: {crews.payAmount}</div>
                         <button onClick={e => {
 
                             releaseCrewMember(crews.id)
