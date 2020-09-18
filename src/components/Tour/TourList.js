@@ -23,7 +23,7 @@ export const TourList = () => {
 
 
     tourNames.forEach((tour) => {
-        tour.days = findTourDaysByTourId(tourDay,tour.id);
+      const  tourdays = findTourDaysByTourId(tourDay,tour.id);
     });
 
     console.log('tourNames', tourNames)
@@ -59,12 +59,13 @@ export const TourList = () => {
             {filteredTours.map((tour) => {
                 console.log(tour);
                 return (<div className="tour-container">
-                    <div className="tour-name">{tour.tourName}</div>
+                  
                     <div className="tour-days">
-                    {tour.days.map((day,i) => {
-                        return (<div key={"day" + i}>
-                            <div>{day.venueName}</div>
-                            <div>{day.venueLocation}</div>
+                    {tourdays.map((day,i) => {
+                        return (<div key={"day"}>
+                            <div>{tourdays.venueName}</div>
+                            <div>{tourdays.venueLocation}</div>
+                            <div className="tour-name">{tour.tourName}</div>
                         </div>)
                     })}
                     </div>
