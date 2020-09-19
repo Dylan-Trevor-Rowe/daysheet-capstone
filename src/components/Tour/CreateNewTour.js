@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { TourContext } from './TourProvider'
 import './Tour.css'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 
@@ -30,10 +30,13 @@ const newTourNames = useRef()
         addTourForm(newTourName)
     }
     return <>
+            <Link to="/"><button className="home">home</button></Link>
         <article className="tour__Form">
+      
             <label className="form__Label">
                 <input type="text" placeholder="Tour Name" ref={newTourNames} />
             </label>
+    
             <button className="submitNewTour" onClick={e => {
                 e.preventDefault()
                 ConstructANewTour()
@@ -41,6 +44,8 @@ const newTourNames = useRef()
             }}>
                 Create a new Tour
             </button>
+            
+    
         </article>
 
     </>

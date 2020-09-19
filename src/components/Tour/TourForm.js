@@ -2,7 +2,8 @@
 import React, { useRef, useContext, useEffect, useState } from 'react'
 import { TourContext } from './TourProvider'
 import './Tour.css'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+
 
 export const NewDayForm = () => {
 
@@ -19,7 +20,7 @@ export const NewDayForm = () => {
     const hotelLocation = useRef(null)
     const tourPick = useRef(null)
     const hotelName = useRef(null)
-    
+
     const { tourNames, getTourName, addTourDay, } = useContext(TourContext)
     const [filteredTours, setTours] = useState([])
 
@@ -55,11 +56,12 @@ export const NewDayForm = () => {
         })
     }
     return <>
+     <Link to="/"><button className="home">home</button></Link>
         <article className="tour__Form">
             <form className="tour__Form">
                 <div className="form-group">
                     <label htmlFor="tourName">tour<br></br></label>
-                    <select defaultValue="" name="tour" ref={tourPick} id="" className="form-control" >
+                    <select defaultValue=""  ref={tourPick} id="" className="form-control" >
                         <option value="0">Select a tour</option>
                         {filteredTours.map(e => (
                             <option key={e.id} value={e.id}>
@@ -72,9 +74,7 @@ export const NewDayForm = () => {
                     date: <br></br>
                     <input type="date" ref={date} />
                 </label>
-
                 <label className="form__Label">
-
                     <input type="text" placeholder="venue Name" ref={venueName} />
                 </label>
 
@@ -111,8 +111,6 @@ export const NewDayForm = () => {
                 }}>
                     submit</button>
             </form>
-
         </article>
-
     </>
 }

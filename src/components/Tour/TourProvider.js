@@ -6,6 +6,7 @@ export const TourContext = React.createContext()
 export const TourProvider = (props) => {
     const [tourDay, setTour] = useState([])
     const [tourNames, setTourName] = useState([])
+    const [tourFilter, setTerms] = useState("")
 
 
     const getTourDay = () => {
@@ -51,7 +52,7 @@ export const TourProvider = (props) => {
 
     return (
         <TourContext.Provider value={{
-            tourDay, getTourDay, addTourDay, getTourName, tourNames, releaseTourDay, addTourForm
+            tourDay, getTourDay, addTourDay, getTourName, tourNames, releaseTourDay, addTourForm,tourFilter,
         }}>
             {props.children}
         </TourContext.Provider>

@@ -1,7 +1,7 @@
 import React, { useRef, useContext } from 'react'
 import { CrewContext } from './CrewProvider'
 import '../Tour/Tour.css'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 export const AddCrewForm = () => {
     const memberName = useRef()
@@ -21,6 +21,7 @@ export const AddCrewForm = () => {
             fullName: memberName.current.value,
             perdiem: perdiem.current.value,
             payAmount: payAmount.current.value
+            
         };
 
         addCrewMember(NewCrewMember).then(() => {
@@ -31,6 +32,7 @@ export const AddCrewForm = () => {
     }
 
     return <>
+  
 
         <label className="form__Label">
 
@@ -57,5 +59,7 @@ export const AddCrewForm = () => {
 
 
         }}> submit</button>
+       
+        <Link to="/"><button className="home">home</button></Link>
     </>
 }
