@@ -12,6 +12,7 @@ import { UserProvider } from "./Users/UserProvider"
 import { AddCrewForm } from "./Crew/CrewForm"
 import { CrewProvider } from "./Crew/CrewProvider"
 import { CrewList } from "./Crew/CrewList"
+import { NavLinks } from "./ApplicationViews"
 
 
 
@@ -46,7 +47,7 @@ export const DaySheet = (props) => {
                             loggedIn ? <TourProvider>
                                 <UserProvider>
                                     <CrewProvider>
-
+                                        <NavLinks></NavLinks>
                                         <TourList />
                                         <CrewList />
                                     </CrewProvider>

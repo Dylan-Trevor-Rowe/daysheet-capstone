@@ -15,13 +15,15 @@ export const CrewList = () => {
     
 
     }, [])
+
+    const filteredCrew = crew.filter(tour => tour.userId === parseInt(localStorage.getItem("tour_manager"))) || {}
     return <>
         <section className="crew__Container">
 {
                 crew.map(crews => {
                    return <article key={crews.id} className="tour__Card">
                         <div><h3> crew members</h3></div>
-                        <div><h3>name: {crews.fullName}</h3></div>
+                        <div>name: {crews.fullName}</div>
                         <div> perdiem: {crews.perdiem}</div>
                         <div>payAmount: {crews.payAmount}</div>
                         <button onClick={e => {
