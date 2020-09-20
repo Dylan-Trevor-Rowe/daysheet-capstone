@@ -1,9 +1,8 @@
-import React, { useRef } from "react"
-import { Link, useHistory } from "react-router-dom";
-import "./Login.css"
+import React, { useRef } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import './Login.css'
 
-
-export const Login = props => {
+export const Login = (props) => {
     const email = useRef()
     const password = useRef()
     const existDialog = useRef()
@@ -12,35 +11,38 @@ export const Login = props => {
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
-            .then(_ => _.json())
-            .then(user => user.length ? user[0] : false)
+            .then((_) => _.json())
+            .then((user) => (user.length ? user[0] : false))
     }
 
     const handleLogin = (e) => {
         e.preventDefault()
 
-        existingUserCheck()
-            .then(exists => {
-                if (exists && exists.password === password.current.value) {
-                    localStorage.setItem("tour_manager", exists.id)
-                    history.push("/")
-                } else if (exists && exists.password !== password.current.value) {
-                    passwordDialog.current.showModal()
-                } else if (!exists) {
-                    existDialog.current.showModal()
-                }
-            })
+        existingUserCheck().then((exists) => {
+            if (exists && exists.password === password.current.value) {
+                localStorage.setItem('tour_manager', exists.id)
+                history.push('/')
+            } else if (exists && exists.password !== password.current.value) {
+                passwordDialog.current.showModal()
+            } else if (!exists) {
+                existDialog.current.showModal()
+            }
+        })
     }
 
     return (
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
-                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
+                <button className="button--close" onClick={(e) => existDialog.current.close()}>
+                    Close
+                </button>
             </dialog>
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Password does not match</div>
-                <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
+                <button className="button--close" onClick={(e) => passwordDialog.current.close()}>
+                    Close
+                </button>
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
@@ -48,26 +50,23 @@ export const Login = props => {
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email"
+                        <input
+                            ref={email}
+                            type="email"
                             id="email"
                             defaultValue="dylanthk@gmail.com"
                             className="form-control"
                             placeholder="Email address"
-                            required autoFocus />
+                            required
+                            autoFocus
+                        />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password"
-                            id="password"
-                            defaultValue="me"
-                            className="form-control"
-                            placeholder="Password"
-                            required />
+                        <input ref={password} type="password" id="password" defaultValue="me" className="form-control" placeholder="Password" required />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
-                            Sign in
-                        </button>
+                        <button type="submit">Sign in</button>
                     </fieldset>
                 </form>
             </section>
