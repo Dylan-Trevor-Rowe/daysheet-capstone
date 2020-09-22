@@ -1,21 +1,19 @@
 import { TourContext } from './TourProvider'
 import React, { useContext, useEffect } from 'react'
 import './Tour.css'
-import { useHistory } from 'react-router-dom'
-// import * as PropTypes from 'prop-types'
 import { Header } from './TourHeader'
+import { useHistory} from 'react-router-dom'
 
-const findTourDaysByTourId = (data, tourId) => data.filter((day) => day.tourId === tourId)
 
 
 export const TourList = () => {
-    const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName } = useContext(TourContext)
+    const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, tourFilter, setTourId} = useContext(TourContext)
 
-    const [selectedTour, setSelectedTour] = React.useState(0)
+
 
     const getTourNameById = (tourId) => {
-        const found = tourNames.find((item) => item.id === tourId)
-
+        const found = tourNames.find((name) => name.id === tourId)
+        // this function gets the name of the tour & then gets the id of the of the selected tour
         if (found) return found.tourName
     }
 
@@ -28,32 +26,30 @@ export const TourList = () => {
 
     const filteredTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
 
-    tourNames.forEach((tour) => {
-        tour.days = findTourDaysByTourId(tourDay, tour.id)
-    })
 
-    const history = useHistory()
 
-    function setTourId({ target }) {
-        return setSelectedTour(parseInt(target.value))
-    }
+   
 
     let filteredDaysByTourId = []
 
-    if (selectedTour) {
-        filteredDaysByTourId = tourDay.filter((item) => item.tourId === selectedTour)
+    if (tourFilter) {
+        // if a tour is selected grab the tourId from the tourdays array that equals the id 
+        // of what tourName the user selected and get me those days
+        filteredDaysByTourId = tourDay.filter((day) => day.tourId === tourFilter)
 
     }
     // }
-    return (
+    const history = useHistory();
+    return     (
         <>
-            <Header filteredTours={filteredTours} selectTour={setTourId} />
+            <Header filterVAL={tourFilter} filteredTours={filteredTours} selectTour={setTourId} />
+            {/* carrying over from my header component */}
 
             <section>
                 {filteredDaysByTourId.map((day) => {
                     return (
                         <div className="tour__Card" key={'day'}>
-                            <div className="tour-name">{getTourNameById(selectedTour)}</div>
+                            <div className="tour-name">{getTourNameById(tourFilter)}</div>
                             <div>venue name: {day.venueName}</div>
                             <div>
                                 venue location:

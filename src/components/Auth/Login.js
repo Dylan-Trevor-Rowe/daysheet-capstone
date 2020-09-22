@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { CrewList } from '../Crew/CrewList'
 import './Login.css'
 
 export const Login = (props) => {
@@ -8,6 +9,7 @@ export const Login = (props) => {
     const existDialog = useRef()
     const passwordDialog = useRef()
     const history = useHistory()
+   
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -63,10 +65,10 @@ export const Login = (props) => {
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password" id="password" defaultValue="me" className="form-control" placeholder="Password" required />
+                        <input  ref={password} type="password" id="password" defaultValue="me" className="form-control" placeholder="Password" required />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">Sign in</button>
+                        <button id="btn-login" type="submit">Sign in</button>
                     </fieldset>
                 </form>
             </section>

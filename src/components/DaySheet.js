@@ -32,6 +32,7 @@ export const DaySheet = (props) => {
         <>
             <Router>
                 <article>
+                {/* {loggedIn === true ? <h1>true</h1>: <h1>false</h1>} */}
                     <Switch>
                         <Route
                             path="TourList/edit/:tourDayId(\d+)"
@@ -40,9 +41,11 @@ export const DaySheet = (props) => {
                             {' '}
                         </Route>
                         <Route path="/crewform">
+                            <TourProvider>
                             <CrewProvider>
                                 <AddCrewForm />
                             </CrewProvider>
+                            </TourProvider>
                         </Route>
 
                         <Route path="/register">
@@ -52,14 +55,15 @@ export const DaySheet = (props) => {
                             <Login />
                         </Route>
                         <Route path="/" exact>
+                   
                             {loggedIn ? (
                                 <TourProvider>
-                                    <UserProvider>
+                                   
                                         <CrewProvider>
                                             <TourList />
                                             <CrewList />
                                         </CrewProvider>
-                                    </UserProvider>
+                                  
                                 </TourProvider>
                             ) : (
                                 <Redirect to="/login"></Redirect>
