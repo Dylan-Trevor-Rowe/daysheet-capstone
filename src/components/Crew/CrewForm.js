@@ -1,5 +1,6 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useContext, useEffect } from 'react'
 import { CrewContext } from './CrewProvider'
+import { TourContext } from '../Tour/TourProvider'
 import '../Tour/Tour.css'
 import { useHistory, Link } from 'react-router-dom'
 
@@ -8,7 +9,17 @@ export const AddCrewForm = () => {
     const perdiem = useRef()
     const payAmount = useRef()
 
-    const { addCrewMember } = useContext(CrewContext)
+    const { addCrewMember, getCrewMembers} = useContext(CrewContext)
+    const { tourNames, getTourName} = useContext(TourContext)
+    const [selectedTour, setSelectedTour] = React.useState(0)
+
+    useEffect(() => {
+        getTourName().catch((err) => console.log(err))
+    }, [])
+
+
+ 
+    const filteredTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
 
     const history = useHistory()
 
@@ -17,15 +28,28 @@ export const AddCrewForm = () => {
             fullName: memberName.current.value,
             perdiem: perdiem.current.value,
             payAmount: payAmount.current.value,
-        }
+            
 
-        addCrewMember(NewCrewMember).then(() => {
+        }
+// adds crew member and a selected tour 
+        addCrewMember(NewCrewMember,selectedTour).then(() => {
             history.push('/')
         })
     }
 
     return (
         <>
+        <select name="tour" onChange={(e) => {
+            //  on change it sets the value to the int of the users selection in the dropdown 
+              setSelectedTour(parseInt(e.target.value))
+        }} value={selectedTour} className="select__Tour">
+                <option value="0">Select a tour</option>
+                {filteredTours.map((e) => (
+                    <option key={e.id} value={e.id}>
+                        {e.tourName}
+                    </option>
+                ))}
+            </select>
             <label className="form__Label">
                 <input type="text" placeholder="crew Member Name" ref={memberName} />
             </label>

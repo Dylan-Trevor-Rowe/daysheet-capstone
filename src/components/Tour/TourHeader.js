@@ -20,9 +20,13 @@ export function Header(props) {
                 <button className="createANewMember">create crew member</button>
             </Link>
 
-            <select onChange={props.selectTour} name="tour" className="select__Tour">
+            <select value={props.tourFilter}onChange={props.selectTour} name="tour" className="select__Tour">
+                {/* passing the state variable via props & passing in selectTour which = setTourById which grabs the 
+                value a user selects*/}
                 <option value="0">Select a tour</option>
                 {props.filteredTours.map((e) => (
+                    // passing in filteredTours via props. I declared this in the List component..this maps
+                    // over only the tours the user has created
                     <option key={e.id} value={e.id}>
                         {e.tourName}
                     </option>

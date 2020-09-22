@@ -6,7 +6,13 @@ export const TourContext = React.createContext()
 export const TourProvider = (props) => {
     const [tourDay, setTour] = useState([])
     const [tourNames, setTourName] = useState([])
-    const [tourFilter, setTerms] = useState('')
+    const [tourFilter, setTourFilter] = useState(0)
+
+    function setTourId({ target }) {
+        // adding a peice of state that takes in the value of the users select
+        // setTour filter takes in the value of the users select
+        return setTourFilter(parseInt(target.value))
+    }
 
     const getTourDay = () => {
         return fetch(`http://localhost:8088/tourDay`)
@@ -61,6 +67,9 @@ export const TourProvider = (props) => {
                 releaseTourDay,
                 addTourForm,
                 tourFilter,
+                setTourId,
+                setTourFilter, 
+                
             }}
         >
             {props.children}
