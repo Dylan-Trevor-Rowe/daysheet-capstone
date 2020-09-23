@@ -16,7 +16,7 @@ import {
 import { AddCrewForm } from './Crew/CrewForm'
 import { CrewProvider } from './Crew/CrewProvider'
 import { CrewList } from './Crew/CrewList'
-
+// import { NewDayForm } from './Tour/TourForm'
 export const DaySheet = (props) => {
     const [loggedIn, setLoggedIn] = useState(false)
 
@@ -30,72 +30,86 @@ export const DaySheet = (props) => {
     return (
         <>
             <Router>
-                <article>
-                {/* {loggedIn === true ? <h1>true</h1>: <h1>false</h1>} */}
-                    <Switch>
-                 
-                        <Route path="/crewform">
-                            <TourProvider>
-                            <CrewProvider>
-                                <AddCrewForm />
-                            </CrewProvider>
-                            </TourProvider>
-                        </Route>
+                <TourProvider>
+                    <CrewProvider>
+                        <article>
+                            {/* {loggedIn === true ? <h1>true</h1>: <h1>false</h1>} */}
+                            <Switch>
 
-                        <Route path="/register">
-                            <Register />
-                        </Route>
-                        {/* <Route path="/crewList">
+                                <Route path="/crewform">
+
+
+                                    <AddCrewForm />
+
+
+                                </Route>
+
+                                <Route path="/register">
+                                    <Register />
+                                </Route>
+                                {/* <Route path="/crewList">
                             <CrewList/>
                         </Route> */}
-                        <Route path="/login">
-                            <Login />
-                        </Route>
-                        <Route path="/" exact>
-                   
-                            {loggedIn ? (
-                                <TourProvider>
-                                   
-                                        <CrewProvider>
+                                <Route path="/login">
+                                    <Login />
+                                </Route>
+                                <Route path="/" exact>
+
+                                    {loggedIn ? (
+
+
+                                        <>
                                             <TourList />
                                             <CrewList />
-                               
-                                        </CrewProvider>
+                                        </>
+
+
+
+                                    ) : (
+                                            <Redirect to="/login"></Redirect>
+                                        )}
+                                </Route>
+                                <Route path="/tourForm" exact render={
+
+                                    props => <NewDayForm {...props} />} >
+
                                   
-                                </TourProvider>
-                            ) : (
-                                <Redirect to="/login"></Redirect>
-                            )}
-                        </Route>
-                        <Route path="/tourForm" exact>
-                            <TourProvider>
-                                <NewDayForm />
-                            </TourProvider>
-                        </Route>
-                        <Route path="/tours" exact>
-                            <TourProvider>
-                           
-                                    <TourList />
-                          
-                            </TourProvider>
-                        </Route>
-                        <Route path="/createnewtour" exact>
-                            <TourProvider>
-                                <CreateNewTour></CreateNewTour>
-                            </TourProvider>
-                        </Route>
-                        {/* <Route path='/crewform' exact>
+
+                                </Route>
+
+
+                                <Route path="/tours" render={
+
+                                    props => <TourList {...props} />} >
+                                </Route>
+
+
+
+                                <Route exact path="/tourForm/edit/:tourId(\d+)" render={
+
+                                    props => <NewDayForm {...props} />} >
+                                </Route>
+
+                                <Route path="/createnewtour" exact>
+
+                                    <CreateNewTour></CreateNewTour>
+
+                                </Route>
+                                {/* <Route path='/crewform' exact>
                   
                     </Route> */}
-                        <Route
-                            path="/logout"
-                            render={(props) => {
-                                localStorage.removeItem('tour_manager')
-                                props.history.push('/login')
-                            }}
-                        ></Route>
-                    </Switch>
-                </article>
+                                <Route
+                                    path="/logout"
+                                    render={(props) => {
+                                        localStorage.removeItem('tour_manager')
+                                        props.history.push('/login')
+                                    }}
+                                ></Route>
+                            </Switch>
+                        </article>
+                    </CrewProvider>
+                </TourProvider>
+
             </Router>
         </>
     )
