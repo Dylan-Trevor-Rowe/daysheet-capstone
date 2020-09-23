@@ -7,6 +7,7 @@ export const TourProvider = (props) => {
     const [tourDay, setTour] = useState([])
     const [tourNames, setTourName] = useState([])
     const [selectedTourId, setTourFilter] = useState('')
+    
 
 
 
@@ -17,7 +18,7 @@ export const TourProvider = (props) => {
         return setTourFilter(parseInt(event.nativeEvent.target.value))
     }
 
-    const getTourDay = () => {
+    const getTourDay = (props) => {
         return fetch(`http://localhost:8088/tourDay`)
             .then((res) => res.json())
             .then(setTour)
@@ -58,6 +59,16 @@ export const TourProvider = (props) => {
             method: 'DELETE',
         }).then(getTourDay)
     }
+    const updateTourDay = tourDayId => {
+        return fetch(`http://localhost:8088/tourDays${tourDay.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(tourDayId)
+        })
+            .then(getTourDay)
+    }
 
     return (
         <TourContext.Provider
@@ -71,7 +82,8 @@ export const TourProvider = (props) => {
                 addTourForm,
                 setTourId,
                 setTourFilter, 
-                selectedTourId
+                selectedTourId,
+                updateTourDay
                 
             }}
         >

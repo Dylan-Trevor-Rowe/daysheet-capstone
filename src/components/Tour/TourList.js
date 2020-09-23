@@ -6,8 +6,13 @@ import { useHistory } from 'react-router-dom'
 
 
 
-export const TourList = () => {
+
+export const TourList = (props) => {
   
+    // const tourDayId = parseInt(props.match.params.tourDayId)
+
+
+    const history = useHistory()
     const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, selectedTourId, setTourId } = useContext(TourContext)
     const filteredTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
 
@@ -25,6 +30,11 @@ export const TourList = () => {
 
     }, [])
 
+    // useEffect(() => {
+    
+      
+    //     .then(setEvent)
+    // }, [])
 
 
 
@@ -33,20 +43,20 @@ export const TourList = () => {
 
         if(!selectedTourId || !tourDay || tourDay.length === 0) {
             setFilteredDaysByTourId([])
-            return
+            return 
         }
-            // if a tour is  selected grab the tourId from the tourdays array that equals the id 
-            // of what tourName the user selected and get me those days
+            // if a tour is not selected and if the day does not = 0  grab the tourId from the tourdays array that equals the id 
+            // of what tourName the user selected and get me those days & then set filter to state and observe the Tourday and 
+            //  selected tourId
          const  days  = tourDay.filter((day) => day.tourId === selectedTourId)
             setFilteredDaysByTourId(days) 
         
 
     }, [tourDay, selectedTourId])
 
+    console.log(tourDay)
 
 
-    // }
-    const history = useHistory();
     return (
         <>
             <Header filterVAL={selectedTourId} filteredTours={filteredTours} selectTour={setTourId} />
@@ -88,7 +98,10 @@ export const TourList = () => {
                             >
                                 delete
                             </button>
-                            <button>edit</button>
+                            <button onClick={(props) => {
+    props.history.push(`/tourForm/edit/${day.id}`)
+   
+}}>Edit</button>    
                         </div>
                     )
                 })}

@@ -11,18 +11,16 @@ export function CrewList() {
 
     const { crew: listCrewMembers, getCrewMembers, releaseCrewMember, getCrewAndJoinTable, crewJoinerTable } = useContext(CrewContext)
 
-    const {   selectedTourId} = useContext(TourContext)
-    
+    const { selectedTourId } = useContext(TourContext)
+
     const [filteredTourMembers, setFilteredTourMembers] = useState([])
 
- 
+
     const fetchCrewMembers = () => {
         getCrewMembers()
         getCrewAndJoinTable()
-        
 
-        
-    }
+}
 
     useEffect(() => {
         fetchCrewMembers()
@@ -48,14 +46,14 @@ export function CrewList() {
 
 
 
-if(filteredTourMembers.length === 0 || selectedTourId === 0) {
-return (
-    <section className="crew__Container"> no crew members on this tour</section>
-)
-}
+    if (filteredTourMembers.length === 0 || selectedTourId === 0) {
+        return (
+            <section className="crew__Container"> no crew members on this tour</section>
+        )
+    }
     return (
         <>
-           <section className="crew__Container">
+            <section className="crew__Container">
                 {filteredTourMembers.map((item, key) => {
 
                     return (
@@ -69,9 +67,9 @@ return (
                             <button
                                 onClick={() => {
                                     releaseCrewMember(item.id).then(() => {
-                                       
+
                                         fetchCrewMembers()
-                                       
+
                                     })
 
                                 }}
