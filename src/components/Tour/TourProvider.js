@@ -6,12 +6,15 @@ export const TourContext = React.createContext()
 export const TourProvider = (props) => {
     const [tourDay, setTour] = useState([])
     const [tourNames, setTourName] = useState([])
-    const [tourFilter, setTourFilter] = useState(0)
+    const [selectedTourId, setTourFilter] = useState('')
 
-    function setTourId({ target }) {
+
+
+    function setTourId(event ) {
+  
         // adding a peice of state that takes in the value of the users select
         // setTour filter takes in the value of the users select
-        return setTourFilter(parseInt(target.value))
+        return setTourFilter(parseInt(event.nativeEvent.target.value))
     }
 
     const getTourDay = () => {
@@ -66,9 +69,9 @@ export const TourProvider = (props) => {
                 tourNames,
                 releaseTourDay,
                 addTourForm,
-                tourFilter,
                 setTourId,
                 setTourFilter, 
+                selectedTourId
                 
             }}
         >

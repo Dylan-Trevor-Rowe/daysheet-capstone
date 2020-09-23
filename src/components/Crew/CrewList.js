@@ -6,69 +6,60 @@ import '../Tour/Tour.css'
 import { useHistory } from 'react-router-dom'
 
 
-var count = 0
-export const CrewList = () => {
-    console.log(++count)
-    const history = useHistory()
-    const { crew: listCrewMembers, getCrewMembers, releaseCrewMember, getCrewAndJoinTable, setCrewJoinerTable, crewJoinerTable } = useContext(CrewContext)
 
-    const {  getTourName, tourFilter: selectedTourId, setTourFilter, } = useContext(TourContext)
+export function CrewList() {
 
-    //tourAndCrewJoiner= []
+    const { crew: listCrewMembers, getCrewMembers, releaseCrewMember, getCrewAndJoinTable, crewJoinerTable } = useContext(CrewContext)
+
+    const {   selectedTourId} = useContext(TourContext)
+    
+    const [filteredTourMembers, setFilteredTourMembers] = useState([])
+
+ 
+    const fetchCrewMembers = () => {
+        getCrewMembers()
+        getCrewAndJoinTable()
+        
+
+        
+    }
 
     useEffect(() => {
-        getCrewMembers().then(getCrewAndJoinTable)
-            .catch((err) => console.log(err))
-        getTourName()
+        fetchCrewMembers()
     }, [])
 
+    useEffect(() => {
 
-    //based on tourid we need to get crew members using a join table between tourId and c
-    console.log("crewJoinerTable", crewJoinerTable)
-    console.log("listCrewMembers", listCrewMembers)
+        if (selectedTourId) {
+            let crewMembers = []
+            crewJoinerTable.forEach(item => {
+                if (item.tourId === selectedTourId) {
+                    const x = listCrewMembers.filter(member => member.id === item.crewMemberId)
+                    x.forEach(i => crewMembers.push(i))
+                }
 
-    function getCrewMembersByTourId(tourId) {
-        let crewMembers = []
-        crewJoinerTable.forEach(item => {
-            if (item.tourId === tourId) {
-                item = listCrewMembers.find(member => member.id === item.crewMemberId)
-                crewMembers.push(item)
-            }
-        })
-        return crewMembers
+            })
+            setFilteredTourMembers(crewMembers)
+        }
 
-    }
-
-    let listCrewMembersByTourId = []
-
-    if (selectedTourId){ 
-        listCrewMembersByTourId = getCrewMembersByTourId(selectedTourId)
-    } if(selectedTourId.tourId === undefined){
-         history.push('/')
-    }
-
-
-    // how to name variables differently that convey 
-    //which variables are functions     | var fetchCrewMembers | getTours | get USers
-    //which variables are data like array | var dataCrewMembers = []
-    ///which variables are id | var selectedTourId
+    }, [selectedTourId, listCrewMembers])
 
 
 
-    // const namesOfTours = tourNames.filter(tourName => {
-    //     return crewJoinerTable.filter(TourFk => tourName.id === TourFk.tourId)
-    // })
-
-    // const crewMembers = crew.filter(tourmems =>  tourmems.id === crewJoinerTable.crewMemberId )
 
 
-
+if(filteredTourMembers.length === 0 || selectedTourId === 0) {
+return (
+    <section className="crew__Container"> no crew members on this tour</section>
+)
+}
     return (
         <>
-            <section className="crew__Container">
-                {listCrewMembersByTourId.map((item) => {
+           <section className="crew__Container">
+                {filteredTourMembers.map((item, key) => {
+
                     return (
-                        <article key={item} className="tour__Card">
+                        <article key={key} className="tour__Card">
                             <div>
                                 <h3> crew members</h3>
                             </div>
@@ -76,9 +67,13 @@ export const CrewList = () => {
                             <div> perdiem: {item.perdiem}</div>
                             <div>payAmount: {item.payAmount}</div>
                             <button
-                                onClick={(e) => {
-                                    releaseCrewMember(item.id)
-                                    history.push('/')
+                                onClick={() => {
+                                    releaseCrewMember(item.id).then(() => {
+                                       
+                                        fetchCrewMembers()
+                                       
+                                    })
+
                                 }}
                             >
                                 delete

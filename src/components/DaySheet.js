@@ -13,7 +13,6 @@ import {
     Redirect,
     BrowserRouter as Router,
 } from 'react-router-dom'
-import { UserProvider } from './Users/UserProvider'
 import { AddCrewForm } from './Crew/CrewForm'
 import { CrewProvider } from './Crew/CrewProvider'
 import { CrewList } from './Crew/CrewList'
@@ -34,12 +33,7 @@ export const DaySheet = (props) => {
                 <article>
                 {/* {loggedIn === true ? <h1>true</h1>: <h1>false</h1>} */}
                     <Switch>
-                        <Route
-                            path="TourList/edit/:tourDayId(\d+)"
-                            render={(props) => <TourList {...props} />}
-                        >
-                            {' '}
-                        </Route>
+                 
                         <Route path="/crewform">
                             <TourProvider>
                             <CrewProvider>
@@ -51,6 +45,9 @@ export const DaySheet = (props) => {
                         <Route path="/register">
                             <Register />
                         </Route>
+                        {/* <Route path="/crewList">
+                            <CrewList/>
+                        </Route> */}
                         <Route path="/login">
                             <Login />
                         </Route>
@@ -62,6 +59,7 @@ export const DaySheet = (props) => {
                                         <CrewProvider>
                                             <TourList />
                                             <CrewList />
+                               
                                         </CrewProvider>
                                   
                                 </TourProvider>
@@ -76,9 +74,9 @@ export const DaySheet = (props) => {
                         </Route>
                         <Route path="/tours" exact>
                             <TourProvider>
-                                <UserProvider>
+                           
                                     <TourList />
-                                </UserProvider>
+                          
                             </TourProvider>
                         </Route>
                         <Route path="/createnewtour" exact>

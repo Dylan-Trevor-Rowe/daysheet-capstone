@@ -7,7 +7,7 @@ export const CrewProvider = (props) => {
     const [crew, setCrew] = useState([])
     const [crewJoinerTable, setCrewJoinerTable] = useState([])
 
-    const getCrewMembers = () => {
+    function getCrewMembers() {
         return fetch(`http://localhost:8088/crewMember`)
             .then((res) => res.json())
             .then(setCrew)
@@ -42,6 +42,11 @@ export const CrewProvider = (props) => {
             method: 'DELETE',
         }).then(getCrewMembers)
     }
+    // const releaseCrewMemberTable = (crewMemberId) => {
+    //     return fetch(`http://localhost:8088/crewMember/${crewMemberId}`, {
+    //         method: 'DELETE',
+    //     }).then(getCrewAndJoinTable)
+    // }
 
     const editCrewMember = (crewMemberId, crew) => {
         return fetch(`http://localhost:8088/crewMember/${crewMemberId}`, {
@@ -70,8 +75,8 @@ export const CrewProvider = (props) => {
                 addCrewMemberJoinTable,
                 getCrewAndJoinTable,
                 crewJoinerTable,
-                 setCrewJoinerTable
-
+                 setCrewJoinerTable,
+                
             }}
         >
             {props.children}
