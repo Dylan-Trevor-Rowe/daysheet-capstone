@@ -9,17 +9,19 @@ import { useHistory } from 'react-router-dom'
 
 export function CrewList() {
 
-    const history = useHistory()
-    const { crew: listCrewMembers, getCrewMembers, releaseCrewMember, getCrewAndJoinTable, setCrewJoinerTable, crewJoinerTable } = useContext(CrewContext)
+    const { crew: listCrewMembers, getCrewMembers, releaseCrewMember, getCrewAndJoinTable, crewJoinerTable } = useContext(CrewContext)
 
-    const { getTourName, tourFilter: selectedTourId, setTourId } = useContext(TourContext)
+    const {   selectedTourId} = useContext(TourContext)
+    
     const [filteredTourMembers, setFilteredTourMembers] = useState([])
 
  
     const fetchCrewMembers = () => {
-        getCrewMembers().then(getCrewAndJoinTable)
-            .catch((err) => console.log(err))
-        getTourName()
+        getCrewMembers()
+        getCrewAndJoinTable()
+        
+
+        
     }
 
     useEffect(() => {
@@ -40,7 +42,7 @@ export function CrewList() {
             setFilteredTourMembers(crewMembers)
         }
 
-    }, [selectedTourId])
+    }, [selectedTourId, listCrewMembers])
 
 
 

@@ -1,15 +1,17 @@
 import { TourContext } from './TourProvider'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Tour.css'
 import { Header } from './TourHeader'
-import { useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 
 export const TourList = () => {
-    const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, selectedTourId, setTourId} = useContext(TourContext)
+  
+    const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, selectedTourId, setTourId } = useContext(TourContext)
+    const filteredTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
 
-
+    const [filteredDaysByTourId, setFilteredDaysByTourId] = useState([])
 
     const getTourNameById = (tourId) => {
         const found = tourNames.find((name) => name.id === tourId)
@@ -19,27 +21,33 @@ export const TourList = () => {
 
     useEffect(() => {
         getTourName()
-            .then(getTourDay)
-            .catch((err) => console.log(err))
+        getTourDay()
+
     }, [])
 
-    const filteredTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
 
 
 
-   
 
-    let filteredDaysByTourId = []
+    useEffect(() => {
 
-    if (selectedTourId) {
-        // if a tour is selected grab the tourId from the tourdays array that equals the id 
-        // of what tourName the user selected and get me those days
-        filteredDaysByTourId = tourDay.filter((day) => day.tourId === selectedTourId)
+        if(!selectedTourId || !tourDay || tourDay.length === 0) {
+            setFilteredDaysByTourId([])
+            return
+        }
+            // if a tour is  selected grab the tourId from the tourdays array that equals the id 
+            // of what tourName the user selected and get me those days
+         const  days  = tourDay.filter((day) => day.tourId === selectedTourId)
+            setFilteredDaysByTourId(days) 
+        
 
-    }
+    }, [tourDay, selectedTourId])
+
+
+
     // }
     const history = useHistory();
-    return     (
+    return (
         <>
             <Header filterVAL={selectedTourId} filteredTours={filteredTours} selectTour={setTourId} />
             {/* carrying over from my header component */}
@@ -74,8 +82,8 @@ export const TourList = () => {
                             </div>
                             <button
                                 onClick={(e) => {
-                                    releaseTourDay(day.id)
-                                    history.push('/')
+                                    releaseTourDay(day.id).then(getTourDay)
+                                  
                                 }}
                             >
                                 delete
