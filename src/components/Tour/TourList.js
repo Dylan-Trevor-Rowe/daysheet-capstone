@@ -7,7 +7,7 @@ import { useHistory} from 'react-router-dom'
 
 
 export const TourList = () => {
-    const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, tourFilter, setTourId} = useContext(TourContext)
+    const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, selectedTourId, setTourId} = useContext(TourContext)
 
 
 
@@ -20,7 +20,6 @@ export const TourList = () => {
     useEffect(() => {
         getTourName()
             .then(getTourDay)
-            .then(releaseTourDay)
             .catch((err) => console.log(err))
     }, [])
 
@@ -32,24 +31,24 @@ export const TourList = () => {
 
     let filteredDaysByTourId = []
 
-    if (tourFilter) {
+    if (selectedTourId) {
         // if a tour is selected grab the tourId from the tourdays array that equals the id 
         // of what tourName the user selected and get me those days
-        filteredDaysByTourId = tourDay.filter((day) => day.tourId === tourFilter)
+        filteredDaysByTourId = tourDay.filter((day) => day.tourId === selectedTourId)
 
     }
     // }
     const history = useHistory();
     return     (
         <>
-            <Header filterVAL={tourFilter} filteredTours={filteredTours} selectTour={setTourId} />
+            <Header filterVAL={selectedTourId} filteredTours={filteredTours} selectTour={setTourId} />
             {/* carrying over from my header component */}
 
             <section>
-                {filteredDaysByTourId.map((day) => {
+                {filteredDaysByTourId.map((day, index) => {
                     return (
-                        <div className="tour__Card" key={'day'}>
-                            <div className="tour-name">{getTourNameById(tourFilter)}</div>
+                        <div className="tour__Card" key={day, index}>
+                            <div className="tour-name">{getTourNameById(selectedTourId)}</div>
                             <div>venue name: {day.venueName}</div>
                             <div>
                                 venue location:
