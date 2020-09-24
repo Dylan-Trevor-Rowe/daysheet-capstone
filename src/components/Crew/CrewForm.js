@@ -32,9 +32,9 @@ export const AddCrewForm = () => {
 
         }
 // adds crew member and a selected tour 
-        addCrewMember(NewCrewMember,selectedTour).then(() => {
+        addCrewMember(NewCrewMember,selectedTour).then(getCrewMembers) 
             history.push('/')
-        })
+        
     }
 
     return (
