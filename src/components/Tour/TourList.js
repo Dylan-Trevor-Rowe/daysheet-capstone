@@ -24,19 +24,14 @@ export const TourList = (props) => {
         if (found) return found.tourName
     }
 
-    // useEffect(() => {
-    //     getTourName()
-    //     getTourDay()
-
-    // }, [])
-
+   
 
 
     useEffect(() => {
-console.log(tourDay)
+
         if(!selectedTourId || !tourDay || tourDay.length === 0) {
             setFilteredDaysByTourId([])
-            console.log('inside the statement')
+     
             return 
         
         }
@@ -49,7 +44,10 @@ console.log(tourDay)
 
     }, [tourDay, selectedTourId])
 
-      return (
+    console.log(tourDay)
+
+
+    return (
         <>
             <Header filterVAL={selectedTourId} filteredTours={filteredTours} selectTour={setTourId} />
             {/* carrying over from my header component */}

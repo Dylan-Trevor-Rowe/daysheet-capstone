@@ -38,6 +38,7 @@ export const TourProvider = (props) => {
     }
 
     const addTourDay = (tour) => {
+        console.log({tour})
         return fetch('http://localhost:8088/tourDay', {
             method: 'POST',
             headers: {
