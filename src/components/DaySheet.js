@@ -73,21 +73,26 @@ export const DaySheet = (props) => {
 
                                     props => <NewDayForm {...props} />} >
 
-                                  
+
 
                                 </Route>
 
 
-                                <Route path="/tours" render={
+                                <Route exact path="/tours" render={
 
                                     props => <TourList {...props} />} >
                                 </Route>
 
 
-
-                                <Route exact path="/tourForm/edit/:tourId(\d+)" render={
+                                <Route exact path="/editTours" render={
 
                                     props => <NewDayForm {...props} />} >
+                                </Route>
+
+
+
+                                <Route exact path="/editTours/edit/:tourDayId(\d+)">
+                                     <NewDayForm />
                                 </Route>
 
                                 <Route path="/createnewtour" exact>
