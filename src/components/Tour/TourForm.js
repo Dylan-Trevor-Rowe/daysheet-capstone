@@ -31,28 +31,31 @@ export const NewDayForm = (props) => {
     const [tourDayLocal, setTourDayLocal] = useState({})
 
     const { tourDayId } = useParams()
-    
+
     const editMode = tourDayId ? true : false
     let selectedTourDay = {}
-    if(tourDayId && tourDay && tourDay.length) {
-        
-        
-       selectedTourDay = tourDay.find(td => td.id === Number(tourDayId)) || {}
-       
-       if(!Object.keys(tourDayLocal).length) // if tourDay !== {}
-       {
-           setTourDayLocal(selectedTourDay)
-           console.log({})
-       }
-       
-    } 
-            //setTourDayLocal(parseIselectedTour)
-            
+    if (tourDayId && tourDay && tourDay.length) {
+
+
+        selectedTourDay = tourDay.find(td => td.id === parseInt(tourDayId)) || {}
+
+        if (!Object.keys(tourDayLocal).length) // if tourDay !== {}
+        // function isEmpty(obj) {
+        //     return Object.keys(obj).length === 0;
+        // }
+        {
+            setTourDayLocal(selectedTourDay)
+           
+        }
+
+    }
+    //setTourDayLocal(parseIselectedTour)
+
 
     useEffect(() => {
         getTourName()
         getTourDay()
-     }, [])
+    }, [])
 
 
 
@@ -62,7 +65,7 @@ export const NewDayForm = (props) => {
     }, [tourNames])
 
     // const currentId =  useRef()
-   
+
     //  currentId.current= parseInt(tourDayId)
 
 
