@@ -16,7 +16,10 @@ import {
 import { AddCrewForm } from './Crew/CrewForm'
 import { CrewProvider } from './Crew/CrewProvider'
 import { CrewList } from './Crew/CrewList'
+import { ImageLogo } from './Tour/img'
 // import { NewDayForm } from './Tour/TourForm'
+
+
 export const DaySheet = (props) => {
     const [loggedIn, setLoggedIn] = useState(false)
 
@@ -40,7 +43,7 @@ export const DaySheet = (props) => {
 
 
                                     <AddCrewForm />
-
+                                    <ImageLogo />
 
                                 </Route>
 
@@ -51,7 +54,9 @@ export const DaySheet = (props) => {
                             <CrewList/>
                         </Route> */}
                                 <Route path="/login">
+
                                     <Login />
+                                    {/* <ImageLogo/> */}
                                 </Route>
                                 <Route path="/" exact>
 
@@ -59,8 +64,14 @@ export const DaySheet = (props) => {
 
 
                                         <>
+                                      
+
                                             <TourList />
+
                                             <CrewList />
+                                                  
+                                            {/* <ImageLogo /> */}
+
                                         </>
 
 
@@ -71,7 +82,7 @@ export const DaySheet = (props) => {
                                 </Route>
                                 <Route path="/tourForm" exact render={
 
-                                    props => <NewDayForm {...props} />} >
+                                    props => <NewDayForm {...props} />}  >
 
 
 
@@ -79,8 +90,8 @@ export const DaySheet = (props) => {
 
 
                                 <Route exact path="/tours" render={
-
-                                    props => <TourList {...props} />} >
+                                    
+                                    props =>  <TourList {...props} />}> <ImageLogo />
                                 </Route>
 
 
@@ -92,12 +103,13 @@ export const DaySheet = (props) => {
 
 
                                 <Route exact path="/editTours/edit/:tourDayId(\d+)">
-                                     <NewDayForm />
+                                    <NewDayForm />
                                 </Route>
 
                                 <Route path="/createnewtour" exact>
 
                                     <CreateNewTour></CreateNewTour>
+                                    <ImageLogo />
 
                                 </Route>
                                 {/* <Route path='/crewform' exact>

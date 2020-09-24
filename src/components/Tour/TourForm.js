@@ -63,6 +63,7 @@ export const NewDayForm = (props) => {
         const userTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
         setTours(userTours)
     }, [tourNames])
+    // filters the users selected tours
 
     // const currentId =  useRef()
 
@@ -71,7 +72,8 @@ export const NewDayForm = (props) => {
 
     const handleControlledInputChange = (e) => {
 
-        const newTourDay = Object.assign({}, tourDayLocal)
+        const newTourDay = Object.assign({}, tourDayLocal)  
+        // Object assign makes a clone of tourDay Local state
         newTourDay[e.target.name] = e.target.value
         setTourDayLocal(newTourDay)
     }
@@ -124,15 +126,19 @@ export const NewDayForm = (props) => {
     return (
         <>
             <Link to="/">
+                <div className="home__btn">
                 <button className="logOut">home</button>
+                </div>
             </Link>
+            <article className="tour__formcontainer">
             <article className="tour__Form">
                 <form className="tour__Form">
                     <div className="form-group">
                         <label htmlFor="tourName">
-                            tour<br></br>
+                        <br></br>
                         </label>
-                        <select defaultValue="" name="tour" ref={tourPick} id="" className="form-control">
+                        <div className="select__touronform">
+                        <select defaultValue="0" name="tour" ref={tourPick} id="" className="form-control">
                             <option value="0">Select a tour</option>
                             {filteredTours.map((e) => (
                                 <option key={e.id} value={e.id}>
@@ -140,6 +146,7 @@ export const NewDayForm = (props) => {
                                 </option>
                             ))}
                         </select>
+                        </div>
                     </div>
                     <label className="form__Label">
                         date: <br></br>
@@ -188,6 +195,7 @@ export const NewDayForm = (props) => {
                         submit
                     </button>
                 </form>
+            </article>
             </article>
         </>
     )

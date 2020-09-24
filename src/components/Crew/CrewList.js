@@ -44,11 +44,9 @@ export function CrewList() {
 
 
 
-
-
-    if (filteredTourMembers.length === 0 || selectedTourId === 0) {
+ if (filteredTourMembers.length === 0 || selectedTourId === 0) {
         return (
-            <section className="crew__Container"> no crew members on this tour</section>
+            <section className="nocrew__Container"> no crew members on this tour</section>
         )
     }
     return (
@@ -76,7 +74,7 @@ export function CrewList() {
                             >
                                 delete
                             </button>
-                            <button>edit</button>
+                            {/* <button>edit</button> */}
                         </article>
                     )
                 })}

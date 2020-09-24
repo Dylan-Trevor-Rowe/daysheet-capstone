@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-
+import { CrewList } from '../Crew/CrewList'
 import './Login.css'
 
 export const Login = (props) => {
@@ -49,7 +49,7 @@ export const Login = (props) => {
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1></h1>
-                    <h2>Please sign in</h2>
+                    <h2 className="login__welcome">DaySheet</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input
