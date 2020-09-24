@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useEffect, useState } from 'react'
 import { TourContext } from './TourProvider'
 import './Tour.css'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link, useParams } from 'react-router-dom'
 
 export const NewDayForm = (props) => {
     const history = useHistory()
@@ -18,57 +18,59 @@ export const NewDayForm = (props) => {
     const tourPick = useRef(null)
     const hotelName = useRef(null)
 
-    const { tourNames, getTourName, addTourDay, updateTourDay, getTourDay,  } = useContext(TourContext)
+    const { tourNames, getTourName, addTourDay, updateTourDay, getTourDay, tourDay } = useContext(TourContext)
     const [filteredTours, setTours] = useState([])
-    const [tourDay, setTourDay] = useState({})
+    const [ListTourDay, setTourDayList] = useState({})
 
     useEffect(() => {
         getTourName().catch((err) => console.log(err))
+                getTourDay()
+        getTourDayInEditMode()
     }, [])
-
+console.log(ListTourDay)
     useEffect(() => {
         const userTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
         setTours(userTours)
     }, [tourNames])
 
-    const editMode = props.match.params.hasOwnProperty("tourDayId")  
-   
+
 
   
- 
-  
+   
+const currentId =  useRef(null)
+ const { tourDayId } = useParams()
+ const editMode = tourDayId ? true : false
+ currentId.current = tourDayId
+
 
     const handleControlledInputChange = (e) => {
        
-        const newTourDay = Object.assign({}, tourDay)          
+        const newTourDay = Object.assign({}, ListTourDay)          
         newTourDay[e.target.name] = e.target.value    
-        setTourDay(newTourDay)                                 
+        setTourDayList(newTourDay)                                 
     }
 
    
-    const getTourDayInEditMode = (props) => {
+    const getTourDayInEditMode = () => {
         if (editMode) {
-            const tourDayId = parseInt(props.match.params.id)
+     
             const selectedTour = tourDay.find(td => td.id === tourDayId) || {}
-            setTours(selectedTour)
+            setTourDayList(selectedTour)
         }
     }
 
-    useEffect(() => {
-        getTourDay()
-        
-    }, [])
 
-    useEffect(() => {
-        getTourDayInEditMode()
-    }, [tourDay])
-
+   
 
     const ConstructNewDay = (props) => {
-        const tourSelect = parseInt(tourPick.current.value)
-        if(editMode) { 
-            updateTourDay({
-            tourId: tourSelect,
+       
+     
+    
+ 
+      if(editMode) { 
+
+           updateTourDay({ 
+            tourId: currentId.current,
             date: date.current.value,
             venueName: venueName.current.value,
             venueLocation: venueLocation.current.value,
@@ -81,10 +83,10 @@ export const NewDayForm = (props) => {
             Hotel: hotelName.current.value,
             hotelLocation: hotelLocation.current.value,
         })
-        .then(history.push('/'))
+        .then(history.push('/')).then(getTourDay)
         } else { 
         
-        
+         const tourSelect = parseInt(tourPick.current.value)
 
         const newDay = {
             tourId: tourSelect,
@@ -101,7 +103,7 @@ export const NewDayForm = (props) => {
             hotelLocation: hotelLocation.current.value,
         }
         addTourDay(newDay).then(() => {
-           props.history.push('/tours')
+        history.push('/')
         })
     } }
     return (
@@ -126,38 +128,38 @@ export const NewDayForm = (props) => {
                     </div>
                     <label className="form__Label">
                         date: <br></br>
-                        <input type="date" ref={date}  defaultValue={tourDay.date}  onChange={handleControlledInputChange}/>
+                        <input type="date" ref={date}  defaultValue={ListTourDay.date} name="date" onChange={handleControlledInputChange}/>
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="venue Name" ref={venueName}   defaultValue={tourDay.venueName} onChange={handleControlledInputChange} />
+                        <input type="text" placeholder="venue Name" ref={venueName}  name="venueName" defaultValue={ListTourDay.venueName} onChange={handleControlledInputChange} />
                     </label>
 
                     <label className="form__Label">
-                        <input type="text" placeholder="venue Location" ref={venueLocation} defaultValue={tourDay.venueLocation}  onChange={handleControlledInputChange}/>
+                        <input type="text" placeholder="venue Location" ref={venueLocation} name="venueLocation"  defaultValue={ListTourDay.venueLocation}  onChange={handleControlledInputChange}/>
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="promoter email" ref={promoterContact}  defaultValue={tourDay.promoterContact} onChange={handleControlledInputChange} />
+                        <input type="text" placeholder="promoter email" ref={promoterContact} name="promoterContact" defaultValue={ListTourDay.promoterContact} onChange={handleControlledInputChange} />
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="load in time" ref={loadIn}  defaultValue={tourDay.loadIn} onChange={handleControlledInputChange} />
+                        <input type="text" placeholder="load in time" ref={loadIn} name="loadIN" defaultValue={ListTourDay.loadIn} onChange={handleControlledInputChange} />
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="soundcheck time" ref={soundCheck} defaultValue={tourDay.soundCheck}  onChange={handleControlledInputChange} />
+                        <input type="text" placeholder="soundcheck time" ref={soundCheck} name="soundCheck" defaultValue={ListTourDay.soundCheck}  onChange={handleControlledInputChange} />
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="catering" ref={catering}  defaultValue={tourDay.catering} onChange={handleControlledInputChange} />
+                        <input type="text" placeholder="catering" ref={catering} name="catering"  defaultValue={ListTourDay.catering} onChange={handleControlledInputChange} />
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="buyout" ref={buyOut}  defaultValue={tourDay.buyOut} onChange={handleControlledInputChange}/>
+                        <input type="text" placeholder="buyout" ref={buyOut} name="buyOut" defaultValue={ListTourDay.buyOut} onChange={handleControlledInputChange}/>
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="set time" ref={setTime} defaultValue={tourDay.setTime}  onChange={handleControlledInputChange}/>
+                        <input type="text" placeholder="set time" ref={setTime} name="setTime" defaultValue={ListTourDay.setTime}  onChange={handleControlledInputChange}/>
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="hotel name" ref={hotelName} defaultValue={tourDay.hotelName}  onChange={handleControlledInputChange}/>
+                        <input type="text" placeholder="hotel name" ref={hotelName} name="hotelName"defaultValue={ListTourDay.hotelName}  onChange={handleControlledInputChange}/>
                     </label>
                     <label className="form__Label">
-                        <input type="text" placeholder="hotel location" ref={hotelLocation} defaultValue={tourDay.hotelLocation}  onChange={handleControlledInputChange}/>
+                        <input type="text" placeholder="hotel location" ref={hotelLocation} name="hotelLocation" defaultValue={ListTourDay.hotelLocation}  onChange={handleControlledInputChange}/>
                     </label>
                     <button
                         className="submit__Button"

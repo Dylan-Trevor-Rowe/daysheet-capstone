@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
 
 export const TourContext = React.createContext()
@@ -8,6 +8,12 @@ export const TourProvider = (props) => {
     const [tourNames, setTourName] = useState([])
     const [selectedTourId, setTourFilter] = useState('')
     
+    useEffect(() => {
+        getTourName()
+        getTourDay()
+
+    }, [])
+
 
 
 
@@ -59,13 +65,14 @@ export const TourProvider = (props) => {
             method: 'DELETE',
         }).then(getTourDay)
     }
-    const updateTourDay = tourDayId => {
-        return fetch(`http://localhost:8088/tourDays${tourDay.id}`, {
+    const updateTourDay = tour => {
+        console.log(tour)
+        return fetch(`http://localhost:8088/tourDay/${parseInt(tour.tourId)}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(tourDayId)
+            body: JSON.stringify(tour)
         })
             .then(getTourDay)
     }

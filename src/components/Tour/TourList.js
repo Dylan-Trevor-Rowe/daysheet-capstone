@@ -24,40 +24,32 @@ export const TourList = (props) => {
         if (found) return found.tourName
     }
 
-    useEffect(() => {
-        getTourName()
-        getTourDay()
-
-    }, [])
-
     // useEffect(() => {
-    
-      
-    //     .then(setEvent)
+    //     getTourName()
+    //     getTourDay()
+
     // }, [])
 
 
 
-
     useEffect(() => {
-
+console.log(tourDay)
         if(!selectedTourId || !tourDay || tourDay.length === 0) {
             setFilteredDaysByTourId([])
+            console.log('inside the statement')
             return 
+        
         }
             // if a tour is not selected and if the day does not = 0  grab the tourId from the tourdays array that equals the id 
             // of what tourName the user selected and get me those days & then set filter to state and observe the Tourday and 
             //  selected tourId
-         const  days  = tourDay.filter((day) => day.tourId === selectedTourId)
+         const  days  = tourDay.filter((day) => parseInt(day.tourId) === parseInt(selectedTourId))
             setFilteredDaysByTourId(days) 
-        
+  console.log(days, "days")
 
     }, [tourDay, selectedTourId])
 
-    console.log(tourDay)
-
-
-    return (
+      return (
         <>
             <Header filterVAL={selectedTourId} filteredTours={filteredTours} selectTour={setTourId} />
             {/* carrying over from my header component */}
@@ -92,14 +84,14 @@ export const TourList = (props) => {
                             </div>
                             <button
                                 onClick={(e) => {
-                                    releaseTourDay(day.id).then(getTourDay)
+                                   releaseTourDay(day.id).then(getTourDay)
                                   
                                 }}
                             >
                                 delete
                             </button>
                             <button onClick={(props) => {
-    props.history.push(`/tourForm/edit/${day.id}`)
+ history.push(`/editTours/edit/${day.id}`)
    
 }}>Edit</button>    
                         </div>
