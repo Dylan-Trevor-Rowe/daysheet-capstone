@@ -43,6 +43,7 @@ export const CreateNewTour = () => {
                     onClick={(e) => {
                         e.preventDefault()
                         ConstructANewTour()
+                        
                         history.push('/')
                     }}
                 >

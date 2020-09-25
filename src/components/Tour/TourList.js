@@ -12,6 +12,10 @@ export const TourList = (props) => {
 
     // const tourDayId = parseInt(props.match.params.tourDayId)
 
+    useEffect(() => {
+        getTourName()
+     
+    }, [])
 
     const history = useHistory()
     const { tourDay, getTourDay, releaseTourDay, tourNames, getTourName, selectedTourId, setTourId } = useContext(TourContext)
@@ -54,7 +58,7 @@ export const TourList = (props) => {
                 <div className="picture__class">
 
 
-                    <img src={require('/home/useradd/workspace/daysheet/src/components/daySheet.jpg')} />
+                    <img form__image src={require('/home/useradd/workspace/daysheet/src/components/daySheet.jpg')} />
                 </div>
                 <div className="holds__list">
                     {filteredDaysByTourId.map((day, index) => {
@@ -62,17 +66,15 @@ export const TourList = (props) => {
                             <div className="tour__Card" key={day, index}>
 
                                 <h2><div className="tour-name">{getTourNameById(selectedTourId)}</div></h2>
-                                <div>  venue name:  {day.venueName}</div>
-                                <div className="list__text"> venue location:  {day.venueLocation} </div>
-
+                                <div>venue name:  {day.venueName}</div>
+                                <div className="list__text">venue location:  {day.venueLocation} </div>
                                 <div>Promoter contact:  {day.promoterContact}</div>
-
                                 <div>Load in:  {day.loadIn}</div>
                                 <div>SoundCheck:  {day.soundCheck}</div>
                                 <div>Catering:  {day.catering}</div>
-                                <div>Buyout:   {day.buyOut}</div>
+                                <div>Buyout:  {day.buyOut}</div>
                                 <div>Set time:  {day.setTime}</div>
-                                <div>Hotel:   {day.Hotel}</div>
+                                <div>Hotel:  {day.Hotel}</div>
                                 <div> Hotel Location:  {day.hotelLocation} </div>
                                 <button className="card__button"
                                     onClick={(e) => {
