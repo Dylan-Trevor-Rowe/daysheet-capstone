@@ -11,6 +11,10 @@ import { useHistory, Link, useParams } from 'react-router-dom'
 //     return true;
 // }
 
+
+
+
+
 export const NewDayForm = (props) => {
     const history = useHistory()
     const date = useRef(null)
@@ -45,7 +49,7 @@ export const NewDayForm = (props) => {
         // }
         {
             setTourDayLocal(selectedTourDay)
-           
+
         }
 
     }
@@ -54,7 +58,8 @@ export const NewDayForm = (props) => {
 
     useEffect(() => {
         getTourName()
-        getTourDay()
+        getTourDay() 
+        
     }, [])
 
 
@@ -63,6 +68,7 @@ export const NewDayForm = (props) => {
         const userTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
         setTours(userTours)
     }, [tourNames])
+    // filters the users selected tours
 
     // const currentId =  useRef()
 
@@ -72,6 +78,7 @@ export const NewDayForm = (props) => {
     const handleControlledInputChange = (e) => {
 
         const newTourDay = Object.assign({}, tourDayLocal)
+        // Object assign makes a clone of tourDay Local state
         newTourDay[e.target.name] = e.target.value
         setTourDayLocal(newTourDay)
     }
@@ -124,71 +131,95 @@ export const NewDayForm = (props) => {
     return (
         <>
             <Link to="/">
-                <button className="logOut">home</button>
+                <div className="home__btn">
+
+                    <button className="logOut">home</button>
+                </div>
+
             </Link>
-            <article className="tour__Form">
-                <form className="tour__Form">
-                    <div className="form-group">
-                        <label htmlFor="tourName">
-                            tour<br></br>
-                        </label>
-                        <select defaultValue="" name="tour" ref={tourPick} id="" className="form-control">
-                            <option value="0">Select a tour</option>
-                            {filteredTours.map((e) => (
-                                <option key={e.id} value={e.id}>
-                                    {e.tourName}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <label className="form__Label">
-                        date: <br></br>
-                        <input type="date" ref={date} defaultValue={tourDayLocal.date} name="date" onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="venue Name" ref={venueName} name="venueName" defaultValue={tourDayLocal.venueName} onChange={handleControlledInputChange} />
-                    </label>
+            <div className="form__img">
+                <article className="tour__formcontainer">
 
-                    <label className="form__Label">
-                        <input type="text" placeholder="venue Location" ref={venueLocation} name="venueLocation" defaultValue={tourDayLocal.venueLocation} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="promoter email" ref={promoterContact} name="promoterContact" defaultValue={tourDayLocal.promoterContact} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="load in time" ref={loadIn} name="loadIN" defaultValue={tourDayLocal.loadIn} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="soundcheck time" ref={soundCheck} name="soundCheck" defaultValue={tourDayLocal.soundCheck} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="catering" ref={catering} name="catering" defaultValue={tourDayLocal.catering} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="buyout" ref={buyOut} name="buyOut" defaultValue={tourDayLocal.buyOut} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="set time" ref={setTime} name="setTime" defaultValue={tourDayLocal.setTime} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="hotel name" ref={hotelName} name="hotelName" defaultValue={tourDayLocal.hotelName} onChange={handleControlledInputChange} />
-                    </label>
-                    <label className="form__Label">
-                        <input type="text" placeholder="hotel location" ref={hotelLocation} name="hotelLocation" defaultValue={tourDayLocal.hotelLocation} onChange={handleControlledInputChange} />
-                    </label>
-                    <button
-                        className="submit__Button"
-                        type="submit"
-                        onClick={(e) => {
-                            e.preventDefault()
-                            ConstructNewDay()
+                    <article className="tour__Form">
+                        <form className="tour__Form">
+                            <div className="form-group">
+                                <label htmlFor="tourName">
+                                    <br></br>
+                                </label>
+                                <div className="select__touronform">
+                                    <select defaultValue="0" name="tour" ref={tourPick} id="" className="form-control">
+                                        <option value="0">Select a tour</option>
+                                        {filteredTours.map((e) => (
+                                            <option key={e.id} value={e.id}>
+                                                {e.tourName}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <label className="form__Label">
+                                date: <br></br>
+                                <input type="date" ref={date} defaultValue={tourDayLocal.date} name="date" onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="venue Name" ref={venueName} name="venueName" defaultValue={tourDayLocal.venueName} onChange={handleControlledInputChange} />
+                            </label>
 
-                        }}
-                    >
-                        submit
-                    </button>
-                </form>
-            </article>
+                            <label className="form__Label">
+                                <input type="text" placeholder="venue Location" ref={venueLocation} name="venueLocation" defaultValue={tourDayLocal.venueLocation} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="promoter email" ref={promoterContact} name="promoterContact" defaultValue={tourDayLocal.promoterContact} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="load in time" ref={loadIn} name="loadIN" defaultValue={tourDayLocal.loadIn} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="soundcheck time" ref={soundCheck} name="soundCheck" defaultValue={tourDayLocal.soundCheck} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="catering" ref={catering} name="catering" defaultValue={tourDayLocal.catering} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="buyout" ref={buyOut} name="buyOut" defaultValue={tourDayLocal.buyOut} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="set time" ref={setTime} name="setTime" defaultValue={tourDayLocal.setTime} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="hotel name" ref={hotelName} name="hotelName" defaultValue={tourDayLocal.Hotel} onChange={handleControlledInputChange} />
+                            </label>
+                            <label className="form__Label">
+                                <input type="text" placeholder="hotel location" ref={hotelLocation} name="hotelLocation" defaultValue={tourDayLocal.hotelLocation} onChange={handleControlledInputChange} />
+                            </label>
+
+
+
+                            <button
+                                className="submit__Button"
+                                type="submit"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    ConstructNewDay()
+                                        getTourDay()
+
+                                    
+                                }}
+                            >
+                                submit
+    </button>
+                        </form>
+                    </article>
+                </article>
+                <div className="float__img">
+                    <img className="" src={require('/home/useradd/workspace/daysheet/src/components/daySheet.jpg')} />
+                </div>
+            </div>
+
+
+
+
+
         </>
     )
 }

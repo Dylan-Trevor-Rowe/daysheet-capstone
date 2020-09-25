@@ -15,9 +15,7 @@ export const TourProvider = (props) => {
     }, [])
 
 
-
-
-    function setTourId(event ) {
+function setTourId(event ) {
   
         // adding a peice of state that takes in the value of the users select
         // setTour filter takes in the value of the users select

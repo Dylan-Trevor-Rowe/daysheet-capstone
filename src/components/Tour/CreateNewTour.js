@@ -29,9 +29,11 @@ export const CreateNewTour = () => {
     return (
         <>
             <Link to="/">
-                <button className="home">home</button>
+                <div className="home__btn">
+                <button className="home" >home</button>
+                </div>
             </Link>
-            <article className="tour__Form">
+            <article className="createatour__Form">
                 <label className="form__Label">
                     <input type="text" placeholder="Tour Name" ref={newTourNames} />
                 </label>
@@ -41,6 +43,7 @@ export const CreateNewTour = () => {
                     onClick={(e) => {
                         e.preventDefault()
                         ConstructANewTour()
+                        
                         history.push('/')
                     }}
                 >
