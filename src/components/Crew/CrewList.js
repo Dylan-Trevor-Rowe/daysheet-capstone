@@ -14,16 +14,14 @@ export function CrewList() {
     const { selectedTourId } = useContext(TourContext)
 
     const [filteredTourMembers, setFilteredTourMembers] = useState([])
+console.log( 'reRender')
 
 
-    const fetchCrewMembers = () => {
+
+    useEffect(() => {
         getCrewMembers()
         getCrewAndJoinTable()
 
-}
-
-    useEffect(() => {
-        fetchCrewMembers()
     }, [])
 
     useEffect(() => {
@@ -66,7 +64,7 @@ export function CrewList() {
                                 onClick={() => {
                                     releaseCrewMember(item.id).then(() => {
 
-                                        fetchCrewMembers()
+                                       getCrewMembers()
 
                                     })
 

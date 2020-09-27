@@ -104,7 +104,9 @@ export const NewDayForm = (props) => {
                 Hotel: hotelName.current.value,
                 hotelLocation: hotelLocation.current.value,
             })
-                .then(history.push('/')).then(getTourDay)
+                history.push('/')
+                    getTourDay()
+                
         } else {
 
             const tourSelect = parseInt(tourPick.current.value)
@@ -125,6 +127,7 @@ export const NewDayForm = (props) => {
             }
             addTourDay(newDay).then(() => {
                 history.push('/')
+                getTourDay()
             })
         }
     }
@@ -202,9 +205,11 @@ export const NewDayForm = (props) => {
                                     e.preventDefault()
                                     ConstructNewDay()
                                         getTourDay()
+                                    }
+                                       
 
                                     
-                                }}
+                                }
                             >
                                 submit
     </button>
