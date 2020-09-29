@@ -60,11 +60,11 @@ export const TourList = (props) => {
 
                     <img form__image src={require('/home/useradd/workspace/daysheet/src/components/daySheet.jpg')} />
                 </div>
-                <div className="holds__list">
+               <div className="holds__list">
                     {filteredDaysByTourId.map((day, index) => {
                         return (
                             <div className="tour__Card" key={day, index}>
-
+ 
                                 <h2><div className="tour-name">{getTourNameById(selectedTourId)}</div></h2>
                                 <div>venue name:  {day.venueName}</div>
                                 <div> date:  {day.date}</div>

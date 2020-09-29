@@ -44,9 +44,9 @@ export const CrewProvider = (props) => {
     }
 
     const releaseCrewMemberJoinTable = (crewMemberId) => {
-        console.log(crewMemberId)
-        // debugger
-        return fetch(`http://localhost:8088/tourAndCrewJoiner?crewMemberId=${crewMemberId}`, {
+        // console.log(crewMemberId)
+        crew.filter()
+        return fetch(`http://localhost:8088/tourAndCrewJoiner/${crewMemberId.id}`, {
             method: 'DELETE',
         }).then(getCrewMembers)
     }

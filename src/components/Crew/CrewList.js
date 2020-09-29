@@ -87,7 +87,7 @@ export function CrewList() {
                             >
                                 delete
                             </button>
-                            {/* <button>edit</button> */}
+                            <button>edit</button>
                         </article>
                     )
                 })}

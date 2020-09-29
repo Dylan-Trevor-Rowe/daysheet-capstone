@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TourList } from './Tour/TourList'
 import { NewDayForm } from './Tour/TourForm'
 import { CreateNewTour } from './Tour/CreateNewTour'
 import './Tour/Tour.css'
 import './DaySheet.css'
 import { TourProvider } from './Tour/TourProvider'
+import { UserProvider } from './Tour/TourProvider'
 import { Login } from './Auth/Login'
 import { Register } from './Auth/Register'
 import {
@@ -18,21 +19,28 @@ import { CrewProvider } from './Crew/CrewProvider'
 import { CrewList } from './Crew/CrewList'
 import { ImageLogo } from './Tour/img'
 // import { NewDayForm } from './Tour/TourForm'
+import { UserContext } from './Users/UserProvider'
 
 
 export const DaySheet = (props) => {
     const [loggedIn, setLoggedIn] = useState(false)
 
+   
+
     useEffect(() => {
         const userLoggedIn = localStorage.getItem('tour_manager')
         if (userLoggedIn) {
             setLoggedIn(true)
+
+            
         }
     }, [])
-
+const name = 'Dylan'
+const appName = 'Daysheet'
     return (
         <>
             <Router>
+                
                 <TourProvider>
                     <CrewProvider>
                         <article>
@@ -64,12 +72,17 @@ export const DaySheet = (props) => {
 
                                         
                                         <>
+                                        
                                       
-                                        <div>Welcome!</div>
+                                    
                                             <TourList />
-                                            
-
+                                            {}
                                             <CrewList />
+            <section className="buttons__Container"><h1>{appName}</h1></section> 
+            <section className="name__container"><h2> Welcome {name} !</h2></section>
+        
+
+                                     
                                                   
                                             {/* <ImageLogo /> */}
 
