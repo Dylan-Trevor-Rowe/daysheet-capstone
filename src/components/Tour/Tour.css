@@ -106,6 +106,8 @@ p {
     justify-content: space-around;
     margin: 10px;
     flex-grow: inherit;
+    font-family: 'Courier New', Courier, monospace;
+  
 }
 
 .createANewDay {
@@ -290,4 +292,17 @@ p {
 margin-right: 600px ;
 margin-top: 50px;
 /* margin-left: 100px; */
+}
+
+.name__container {
+    margin-left: 43%;
+    width: 200px;
+    border:  solid 2px rgb(141, 141, 199);
+    background-color: white;
+    border-radius: 48%;
+    
+
+}
+h2 {
+    text-align: center;
 }
