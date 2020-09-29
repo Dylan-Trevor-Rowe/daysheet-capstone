@@ -42,6 +42,14 @@ export const CrewProvider = (props) => {
             method: 'DELETE',
         }).then(getCrewMembers)
     }
+
+    const releaseCrewMemberJoinTable = (crewMemberId) => {
+        console.log(crewMemberId)
+        // debugger
+        return fetch(`http://localhost:8088/tourAndCrewJoiner?crewMemberId=${crewMemberId}`, {
+            method: 'DELETE',
+        }).then(getCrewMembers)
+    }
     // const releaseCrewMemberTable = (crewMemberId) => {
     //     return fetch(`http://localhost:8088/crewMember/${crewMemberId}`, {
     //         method: 'DELETE',
@@ -61,7 +69,7 @@ export const CrewProvider = (props) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({crewMemberId:crewId, tourId}),
-        }).then(getCrewMembers)
+        })
     }
 
     return (
@@ -76,6 +84,7 @@ export const CrewProvider = (props) => {
                 getCrewAndJoinTable,
                 crewJoinerTable,
                  setCrewJoinerTable,
+                 releaseCrewMemberJoinTable
                 
             }}
         >

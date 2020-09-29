@@ -6,7 +6,7 @@ export const TourContext = React.createContext()
 export const TourProvider = (props) => {
     const [tourDay, setTour] = useState([])
     const [tourNames, setTourName] = useState([])
-    const [selectedTourId, setTourFilter] = useState('')
+    const [selectedTourId, setTourFilter] = useState(0)
     
     useEffect(() => {
         getTourName()

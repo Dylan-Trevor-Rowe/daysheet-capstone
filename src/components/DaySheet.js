@@ -62,11 +62,12 @@ export const DaySheet = (props) => {
 
                                     {loggedIn ? (
 
-
+                                        
                                         <>
                                       
-
+                                        <div>Welcome!</div>
                                             <TourList />
+                                            
 
                                             <CrewList />
                                                   
@@ -91,14 +92,14 @@ export const DaySheet = (props) => {
 
                                 <Route exact path="/tours" render={
                                     
-                                    props =>  <TourList {...props} />}> <ImageLogo />
+                                    props =>  <TourList {...props} />}> <CrewList></CrewList><ImageLogo />
                                 </Route>
 
 
-                                <Route exact path="/editTours" render={
+                                {/* <Route exact path="/editTours" render={
 
                                     props => <NewDayForm {...props} />} >
-                                </Route>
+                                </Route> */}
 
 
 
