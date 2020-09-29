@@ -1,3 +1,4 @@
+  
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { TourContext } from './TourProvider'
 import './Tour.css'
@@ -7,7 +8,7 @@ export const CreateNewTour = () => {
     const history = useHistory()
     const newTourNames = useRef()
 
-    const { tourNames, getTourName, addTourForm } = useContext(TourContext)
+    const { tourNames, getTourName, addTourForm, setTourFilter } = useContext(TourContext)
     const [filteredTours, setTours] = useState([])
 
     useEffect(() => {
@@ -45,6 +46,7 @@ export const CreateNewTour = () => {
                         ConstructANewTour()
                         
                         history.push('/')
+                        setTourFilter(0)
                     }}
                 >
                     Create a new Tour

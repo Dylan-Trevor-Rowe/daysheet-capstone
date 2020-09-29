@@ -10,7 +10,7 @@ export const AddCrewForm = () => {
     const payAmount = useRef()
 
     const { addCrewMember, getCrewMembers} = useContext(CrewContext)
-    const { tourNames, getTourName} = useContext(TourContext)
+    const { tourNames, getTourName, setTourFilter} = useContext(TourContext)
     const [selectedTour, setSelectedTour] = React.useState(0)
 
     useEffect(() => {
@@ -34,7 +34,8 @@ export const AddCrewForm = () => {
 // adds crew member and a selected tour 
         addCrewMember(NewCrewMember,selectedTour).then(() => {
             history.push('/')
-        })
+            setTourFilter(0)
+        }).then(getCrewMembers)
           
         
     }

@@ -30,7 +30,7 @@ export const NewDayForm = (props) => {
     const tourPick = useRef(null)
     const hotelName = useRef(null)
 
-    const { tourNames, getTourName, addTourDay, updateTourDay, getTourDay, tourDay } = useContext(TourContext)
+    const { tourNames, getTourName, addTourDay, updateTourDay, getTourDay, tourDay, setTourFilter } = useContext(TourContext)
     const [filteredTours, setTours] = useState([])
     const [tourDayLocal, setTourDayLocal] = useState({})
 
@@ -58,10 +58,10 @@ export const NewDayForm = (props) => {
 
     useEffect(() => {
         getTourName()
-        getTourDay() 
+  
         
-    }, [])
-
+    }, [tourDay])
+      // getTourDay() 
 
 
     useEffect(() => {
@@ -104,7 +104,10 @@ export const NewDayForm = (props) => {
                 Hotel: hotelName.current.value,
                 hotelLocation: hotelLocation.current.value,
             })
-                .then(history.push('/')).then(getTourDay)
+                history.push('/') 
+                setTourFilter(0)
+            
+                
         } else {
 
             const tourSelect = parseInt(tourPick.current.value)
@@ -125,6 +128,8 @@ export const NewDayForm = (props) => {
             }
             addTourDay(newDay).then(() => {
                 history.push('/')
+                setTourFilter(0)
+                getTourDay()
             })
         }
     }
@@ -148,7 +153,7 @@ export const NewDayForm = (props) => {
                                 </label>
                                 <div className="select__touronform">
                                     <select defaultValue="0" name="tour" ref={tourPick} id="" className="form-control">
-                                        <option value="0">Select a tour</option>
+                                        <option value="1">Select a tour</option>
                                         {filteredTours.map((e) => (
                                             <option key={e.id} value={e.id}>
                                                 {e.tourName}
@@ -201,10 +206,12 @@ export const NewDayForm = (props) => {
                                 onClick={(e) => {
                                     e.preventDefault()
                                     ConstructNewDay()
-                                        getTourDay()
+                                
+                                    }
+                                       
 
                                     
-                                }}
+                                }
                             >
                                 submit
     </button>

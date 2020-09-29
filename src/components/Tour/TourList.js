@@ -67,6 +67,7 @@ export const TourList = (props) => {
 
                                 <h2><div className="tour-name">{getTourNameById(selectedTourId)}</div></h2>
                                 <div>venue name:  {day.venueName}</div>
+                                <div> date:  {day.date}</div>
                                 <div className="list__text">venue location:  {day.venueLocation} </div>
                                 <div>Promoter contact:  {day.promoterContact}</div>
                                 <div>Load in:  {day.loadIn}</div>
@@ -86,6 +87,7 @@ export const TourList = (props) => {
                             </button>
                                 <button onClick={(props) => {
                                     history.push(`/editTours/edit/${day.id}`)
+                                    getTourDay()
 
                                 }} className="card__button">Edit</button>
                             </div>
