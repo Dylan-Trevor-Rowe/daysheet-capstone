@@ -14,7 +14,7 @@ export const TourList = (props) => {
 
     useEffect(() => {
         getTourName()
-     
+
     }, [])
 
     const history = useHistory()
@@ -60,17 +60,17 @@ export const TourList = (props) => {
 
                     <img form__image src={require('/home/useradd/workspace/daysheet/src/components/daySheet.jpg')} />
                 </div>
-               <div className="holds__list">
+                <div className="holds__list">
                     {filteredDaysByTourId.map((day, index) => {
                         return (
                             <div className="tour__Card" key={day, index}>
- 
+
                                 <h2><div className="tour-name">{getTourNameById(selectedTourId)}</div></h2>
-                                <div>venue name:  {day.venueName}</div>
-                                <div> date:  {day.date}</div>
-                                <div className="list__text">venue location:  {day.venueLocation} </div>
-                                <div>Promoter contact:  {day.promoterContact}</div>
-                                <div>Load in:  {day.loadIn}</div>
+                                <div className="container"> Venue Name:  {day.venueName}</div>
+                                <div> Date: {new Date(day.date).toLocaleDateString('en-Us')}</div>
+                                <div className="list__text">Venue Location:  {day.venueLocation} </div>
+                                <div>Promoter Contact:  {day.promoterContact}</div>
+                                <div>Load In:  {day.loadIn}</div>
                                 <div>SoundCheck:  {day.soundCheck}</div>
                                 <div>Catering:  {day.catering}</div>
                                 <div>Buyout:  {day.buyOut}</div>

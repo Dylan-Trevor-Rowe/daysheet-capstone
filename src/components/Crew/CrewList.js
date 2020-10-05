@@ -11,7 +11,7 @@ export function CrewList() {
 
     const { crew: listCrewMembers, getCrewMembers, releaseCrewMember, getCrewAndJoinTable, crewJoinerTable, releaseCrewMemberJoinTable } = useContext(CrewContext)
 
-    const { selectedTourId, setTourFilter } = useContext(TourContext)
+    const { selectedTourId, setTourFilter, getTourDay } = useContext(TourContext)
 
     const [filteredTourMembers, setFilteredTourMembers] = useState([])
 
@@ -20,26 +20,47 @@ export function CrewList() {
 
     useEffect(() => {
         getCrewMembers()
-        getCrewAndJoinTable()
+        getTourDay()
 
     }, [])
 
+//     if (selectedTourId) {
+//         let crewMembers = []
+//         crewJoinerTable.forEach(item => {
+//             if (item.tourId === selectedTourId) {
+//                 // const x = listCrewMembers.filter(member => member.id === item.crewMemberId)
+//                 // console.log({x})
+//                 // x.forEach(i => crewMembers.push(i))
+//                 listCrewMembers.forEach(crewMem => {
+//                     if (crewMem.id === item.crewMemberId) {
+//                         crewMembers.push(crewMem)
+
+//                     }
+//                 })
+//             }
+
+//         })
+//         setFilteredTourMembers(crewMembers)
+//     }
+
+// }, [selectedTourId, listCrewMembers])
+
     useEffect(() => {
-        console.log({ selectedTourId, filteredTourMembers, listCrewMembers, crewJoinerTable })
+        console.log({ selectedTourId, filteredTourMembers, listCrewMembers })
 
         if (selectedTourId) {
             let crewMembers = []
-            crewJoinerTable.forEach(item => {
+            listCrewMembers.forEach(item => {
                 if (item.tourId === selectedTourId) {
+                    
                     // const x = listCrewMembers.filter(member => member.id === item.crewMemberId)
                     // console.log({x})
                     // x.forEach(i => crewMembers.push(i))
-                    listCrewMembers.forEach(crewMem => {
-                        if (crewMem.id === item.crewMemberId) {
-                            crewMembers.push(crewMem)
+                  
+                            crewMembers.push(item)
 
-                        }
-                    })
+                        
+                   
                 }
 
             })
@@ -70,15 +91,15 @@ export function CrewList() {
                             <div>payAmount: {item.payAmount}</div>
                             <button
                                 onClick={() => {
-                                    releaseCrewMemberJoinTable(item.id).then(() => {
+                               
                                         releaseCrewMember(item.id).then(() => {
                                             history.push('/')
-                                            setTourFilter(0)
-    
+                                            // setTourFilter(0)
+                                            getTourDay()
                                         })
                                       
 
-                                    })
+                                    
                                         // getCrewMembers()
 
                                     

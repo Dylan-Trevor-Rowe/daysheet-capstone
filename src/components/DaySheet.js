@@ -19,7 +19,7 @@ import { CrewProvider } from './Crew/CrewProvider'
 import { CrewList } from './Crew/CrewList'
 import { ImageLogo } from './Tour/img'
 // import { NewDayForm } from './Tour/TourForm'
-import { UserContext } from './Users/UserProvider'
+// import { UserContext } from './Users/UserProvider'
 
 
 export const DaySheet = (props) => {
@@ -35,7 +35,7 @@ export const DaySheet = (props) => {
             
         }
     }, [])
-const name = 'Dylan'
+
 const appName = 'Daysheet'
     return (
         <>
@@ -79,7 +79,7 @@ const appName = 'Daysheet'
                                             {}
                                             <CrewList />
             <section className="buttons__Container"><h1>{appName}</h1></section> 
-            <section className="name__container"><h2> Welcome {name} !</h2></section>
+            <section className="name__container"><h2>Welcome!</h2></section>
         
 
                                      
