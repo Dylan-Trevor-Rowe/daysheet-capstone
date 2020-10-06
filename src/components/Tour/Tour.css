@@ -1,5 +1,5 @@
 .tour__Card {
-
+    
     border: groove 1px grey;
     font-size: larger;
     margin-bottom: 20px;
@@ -12,9 +12,12 @@
     opacity: 90%;
 	padding: 20px;
 	
-    /* margin: 10px; */
+    margin: 10px;
 }
-
+/* .bolder {
+    display: flex;
+    flex-direction: row;
+} */
 
 p {
 
@@ -22,6 +25,11 @@ p {
 
 
 }
+
+/* .container {
+    /* display: flex;
+    flex-direction: row;
+} */ */
 
 .tour-container {
     display: flex;

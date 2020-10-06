@@ -28,6 +28,7 @@ export const AddCrewForm = () => {
             fullName: memberName.current.value,
             perdiem: perdiem.current.value,
             payAmount: payAmount.current.value,
+            tourId: selectedTour
             
 
         }

@@ -114,7 +114,7 @@ export const NewDayForm = (props) => {
 
             const newDay = {
                 tourId: tourSelect,
-                date: date.current.value,
+                date: Date.now(),
                 venueName: venueName.current.value,
                 venueLocation: venueLocation.current.value,
                 promoterContact: promoterContact.current.value,

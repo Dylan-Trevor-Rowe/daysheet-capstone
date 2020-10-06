@@ -30,10 +30,10 @@ export const CrewProvider = (props) => {
             body: JSON.stringify(crew),
         })  .then((res) => res.json())
     
-        .then((res) => {
-            console.log(res)
-            addCrewMemberJoinTable(res.id, tourId)
-        } ).then(getCrewMembers)
+        // .then((res) => {
+        //     console.log(res)
+        //     addCrewMemberJoinTable(res.id, tourId)
+        // } ).then(getCrewMembers)
         
     }
 
@@ -43,13 +43,13 @@ export const CrewProvider = (props) => {
         }).then(getCrewMembers)
     }
 
-    const releaseCrewMemberJoinTable = (crewMemberId) => {
-        // console.log(crewMemberId)
-        crew.filter()
-        return fetch(`http://localhost:8088/tourAndCrewJoiner/${crewMemberId.id}`, {
-            method: 'DELETE',
-        }).then(getCrewMembers)
-    }
+    // const releaseCrewMemberJoinTable = (crewMemberId) => {
+    //     // console.log(crewMemberId)
+       
+    //     return fetch(`http://localhost:8088/tourAndCrewJoiner/${crewMemberId.id}`, {
+    //         method: 'DELETE',
+    //     }).then(getCrewMembers)
+    // }
     // const releaseCrewMemberTable = (crewMemberId) => {
     //     return fetch(`http://localhost:8088/crewMember/${crewMemberId}`, {
     //         method: 'DELETE',
@@ -62,15 +62,15 @@ export const CrewProvider = (props) => {
             body: JSON.stringify(crew),
         }).then(getCrewMembers)
     }
-    const addCrewMemberJoinTable = (crewId,tourId) => {
-        return fetch('http://localhost:8088/tourAndCrewJoiner', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({crewMemberId:crewId, tourId}),
-        })
-    }
+    // const addCrewMemberJoinTable = (crewId,tourId) => {
+    //     return fetch('http://localhost:8088/tourAndCrewJoiner', { 
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({crewMemberId:crewId, tourId}),
+    //     })
+    // }
 
     return (
         <CrewContext.Provider
@@ -80,11 +80,11 @@ export const CrewProvider = (props) => {
                 setCrew,
                 releaseCrewMember,
                 addCrewMember,
-                addCrewMemberJoinTable,
+                // addCrewMemberJoinTable,
                 getCrewAndJoinTable,
-                crewJoinerTable,
-                 setCrewJoinerTable,
-                 releaseCrewMemberJoinTable
+                // crewJoinerTable,
+                //  setCrewJoinerTable,
+                //  releaseCrewMemberJoinTable
                 
             }}
         >
