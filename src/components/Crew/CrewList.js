@@ -48,7 +48,7 @@ export function CrewList() {
     useEffect(() => {
         console.log({ selectedTourId, filteredTourMembers, listCrewMembers })
 
-        if (selectedTourId) {
+        if (selectedTourId) { 
             let crewMembers = []
             listCrewMembers.forEach(item => {
                 if (item.tourId === selectedTourId) {
