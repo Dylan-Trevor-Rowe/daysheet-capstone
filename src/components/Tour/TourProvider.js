@@ -7,16 +7,14 @@ export const TourProvider = (props) => {
     const [tourDay, setTour] = useState([])
     const [tourNames, setTourName] = useState([])
     const [selectedTourId, setTourFilter] = useState(0)
-    
+
     useEffect(() => {
         getTourName()
         getTourDay()
-
     }, [])
 
+    function setTourId(event) {
 
-function setTourId(event ) {
-  
         // adding a peice of state that takes in the value of the users select
         // setTour filter takes in the value of the users select
         return setTourFilter(parseInt(event.nativeEvent.target.value))
@@ -36,7 +34,7 @@ function setTourId(event ) {
     }
 
     const addTourDay = (tour) => {
-        console.log({tour})
+        console.log({ tour })
         return fetch('http://localhost:8088/tourDay', {
             method: 'POST',
             headers: {
@@ -58,7 +56,6 @@ function setTourId(event ) {
             .then(getTourDay)
             .catch((err) => console.log(err))
     }
-
     const releaseTourDay = (tourDayId) => {
         return fetch(`http://localhost:8088/tourDay/${tourDayId}`, {
             method: 'DELETE',
@@ -75,7 +72,6 @@ function setTourId(event ) {
         })
             .then(getTourDay)
     }
-
     return (
         <TourContext.Provider
             value={{
@@ -87,10 +83,10 @@ function setTourId(event ) {
                 releaseTourDay,
                 addTourForm,
                 setTourId,
-                setTourFilter, 
+                setTourFilter,
                 selectedTourId,
                 updateTourDay
-                
+
             }}
         >
             {props.children}

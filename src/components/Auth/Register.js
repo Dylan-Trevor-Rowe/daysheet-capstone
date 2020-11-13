@@ -40,7 +40,7 @@ export const Register = (props) => {
                             history.push('/login')
                         }
                     })
-            })
+                 })
         } else {
             passwordDialog.current.showModal()
         }

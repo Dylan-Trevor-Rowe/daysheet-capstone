@@ -3,25 +3,13 @@ import { TourContext } from './TourProvider'
 import './Tour.css'
 import { useHistory, Link, useParams } from 'react-router-dom'
 
-// function isEmpty(obj) {
-//     for(var key in obj) {
-//         if(obj.hasOwnProperty(key))
-//             return false;
-//     }
-//     return true;
-// }
-
-
-
-
-
 export const NewDayForm = (props) => {
     const history = useHistory()
     const date = useRef(null)
     const venueLocation = useRef(null)
     const venueName = useRef(null)
     const promoterContact = useRef(null)
-    const loadIn = useRef(null)
+    const loadIn = useRef(null)     
     const soundCheck = useRef(null)
     const catering = useRef(null)
     const buyOut = useRef(null)
@@ -37,56 +25,33 @@ export const NewDayForm = (props) => {
     const { tourDayId } = useParams()
 
     const editMode = tourDayId ? true : false
+
     let selectedTourDay = {}
+
     if (tourDayId && tourDay && tourDay.length) {
-
-
         selectedTourDay = tourDay.find(td => td.id === parseInt(tourDayId)) || {}
 
-        if (!Object.keys(tourDayLocal).length) // if tourDay !== {}
-        // function isEmpty(obj) {
-        //     return Object.keys(obj).length === 0;
-        // }
-        {
+        if (!Object.keys(tourDayLocal).length) {
             setTourDayLocal(selectedTourDay)
-
         }
-
     }
-    //setTourDayLocal(parseIselectedTour)
-
-
     useEffect(() => {
         getTourName()
-  
-        
-    }, [tourDay])
-      // getTourDay() 
 
+    }, [tourDay])
 
     useEffect(() => {
         const userTours = tourNames.filter((tour) => tour.userId === parseInt(localStorage.getItem('tour_manager'))) || {}
         setTours(userTours)
     }, [tourNames])
-    // filters the users selected tours
-
-    // const currentId =  useRef()
-
-    //  currentId.current= parseInt(tourDayId)
-
 
     const handleControlledInputChange = (e) => {
-
         const newTourDay = Object.assign({}, tourDayLocal)
-        // Object assign makes a clone of tourDay Local state
         newTourDay[e.target.name] = e.target.value
         setTourDayLocal(newTourDay)
     }
 
     const ConstructNewDay = (props) => {
-
-
-
 
         if (editMode) {
 
@@ -104,14 +69,12 @@ export const NewDayForm = (props) => {
                 Hotel: hotelName.current.value,
                 hotelLocation: hotelLocation.current.value,
             })
-                history.push('/') 
-                setTourFilter(0)
-            
-                
+            history.push('/')
+            setTourFilter(0)
+
         } else {
 
             const tourSelect = parseInt(tourPick.current.value)
-
             const newDay = {
                 tourId: tourSelect,
                 date: Date.now(),
@@ -137,14 +100,11 @@ export const NewDayForm = (props) => {
         <>
             <Link to="/">
                 <div className="home__btn">
-
                     <button className="logOut">home</button>
                 </div>
-
             </Link>
             <div className="form__img">
                 <article className="tour__formcontainer">
-
                     <article className="tour__Form">
                         <form className="tour__Form">
                             <div className="form-group">
@@ -169,7 +129,6 @@ export const NewDayForm = (props) => {
                             <label className="form__Label">
                                 <input type="text" placeholder="venue Name" ref={venueName} name="venueName" defaultValue={tourDayLocal.venueName} onChange={handleControlledInputChange} />
                             </label>
-
                             <label className="form__Label">
                                 <input type="text" placeholder="venue Location" ref={venueLocation} name="venueLocation" defaultValue={tourDayLocal.venueLocation} onChange={handleControlledInputChange} />
                             </label>
@@ -197,22 +156,13 @@ export const NewDayForm = (props) => {
                             <label className="form__Label">
                                 <input type="text" placeholder="hotel location" ref={hotelLocation} name="hotelLocation" defaultValue={tourDayLocal.hotelLocation} onChange={handleControlledInputChange} />
                             </label>
-
-
-
                             <button
                                 className="submit__Button"
                                 type="submit"
                                 onClick={(e) => {
                                     e.preventDefault()
                                     ConstructNewDay()
-                                
-                                    }
-                                       
-
-                                    
-                                }
-                            >
+                                }}>
                                 submit
     </button>
                         </form>
@@ -222,11 +172,6 @@ export const NewDayForm = (props) => {
                     <img className="" src={require('/home/useradd/workspace/daysheet/src/components/daySheet.jpg')} />
                 </div>
             </div>
-
-
-
-
-
         </>
     )
 }

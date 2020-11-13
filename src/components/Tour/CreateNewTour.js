@@ -47,8 +47,7 @@ export const CreateNewTour = () => {
                         
                         history.push('/')
                         setTourFilter(0)
-                    }}
-                >
+                    }} >
                     Create a new Tour
                 </button>
             </article>

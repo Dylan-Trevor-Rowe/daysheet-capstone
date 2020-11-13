@@ -10,7 +10,6 @@ export const Login = (props) => {
     const passwordDialog = useRef()
     const history = useHistory()
    
-
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
             .then((_) => _.json())
