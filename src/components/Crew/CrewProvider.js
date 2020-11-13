@@ -16,25 +16,16 @@ export const CrewProvider = (props) => {
         return fetch(`http://localhost:8088/tourAndCrewJoiner`)
             .then((res) => res.json())
             .then(setCrewJoinerTable)
-          
     }
 
-    const addCrewMember = (crew,tourId ) => {
-        // adds a crew member then updates the Joiner table with the tourId the user selected and 
-        // the crewMember Id 
+    const addCrewMember = (crew, tourId) => {
         return fetch('http://localhost:8088/crewMember', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(crew),
-        })  .then((res) => res.json())
-    
-        // .then((res) => {
-        //     console.log(res)
-        //     addCrewMemberJoinTable(res.id, tourId)
-        // } ).then(getCrewMembers)
-        
+        }).then((res) => res.json())
     }
 
     const releaseCrewMember = (crewMemberId) => {
@@ -42,36 +33,12 @@ export const CrewProvider = (props) => {
             method: 'DELETE',
         }).then(getCrewMembers)
     }
-
-    // const releaseCrewMemberJoinTable = (crewMemberId) => {
-    //     // console.log(crewMemberId)
-       
-    //     return fetch(`http://localhost:8088/tourAndCrewJoiner/${crewMemberId.id}`, {
-    //         method: 'DELETE',
-    //     }).then(getCrewMembers)
-    // }
-    // const releaseCrewMemberTable = (crewMemberId) => {
-    //     return fetch(`http://localhost:8088/crewMember/${crewMemberId}`, {
-    //         method: 'DELETE',
-    //     }).then(getCrewAndJoinTable)
-    // }
-
     const editCrewMember = (crewMemberId, crew) => {
         return fetch(`http://localhost:8088/crewMember/${crewMemberId}`, {
             method: 'PATCH',
             body: JSON.stringify(crew),
         }).then(getCrewMembers)
     }
-    // const addCrewMemberJoinTable = (crewId,tourId) => {
-    //     return fetch('http://localhost:8088/tourAndCrewJoiner', { 
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({crewMemberId:crewId, tourId}),
-    //     })
-    // }
-
     return (
         <CrewContext.Provider
             value={{
@@ -80,15 +47,9 @@ export const CrewProvider = (props) => {
                 setCrew,
                 releaseCrewMember,
                 addCrewMember,
-                // addCrewMemberJoinTable,
                 getCrewAndJoinTable,
-                // crewJoinerTable,
-                //  setCrewJoinerTable,
-                //  releaseCrewMemberJoinTable
-                
-            }}
-        >
+                editCrewMember
+            }}>
             {props.children}
-        </CrewContext.Provider>
-    )
+        </CrewContext.Provider>)
 }
