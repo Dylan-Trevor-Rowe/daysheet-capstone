@@ -3,7 +3,7 @@ import { TourList } from './Tour/TourList'
 import { NewDayForm } from './Tour/TourForm'
 import { CreateNewTour } from './Tour/CreateNewTour'
 import './Tour/Tour.css'
-import './DaySheet.css'
+
 import { TourProvider } from './Tour/TourProvider'
 import { UserProvider } from './Tour/TourProvider'
 import { Login } from './Auth/Login'
